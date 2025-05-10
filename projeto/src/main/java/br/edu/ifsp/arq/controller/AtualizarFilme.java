@@ -11,55 +11,43 @@ import javax.servlet.http.HttpServletResponse;
 
 
 @WebServlet({"/editar-filme", "/atualizar-filme"})
-public class AtualizarFilme extends HttpServlet  {
-	 protected void doGet(HttpServletRequest request, HttpServletResponse response)
-	            throws ServletException, IOException {
-	        
-	        int id = Integer.parseInt(request.getParameter("id"));
-	        
-	        List<Filme> filmes = (List<Filme>) getServletContext().getAttribute("filmes");
-	        
-	        Filme filmeSelecionado = null;
-	        
-	        for (Filme filme : filmes) {
-	            if (filme.getId() == id) {
-	                filmeSelecionado = filme;
-	                break;
-	            }
-	        }
+@MultipartConfig
+public class AtualizarFilme extends HttpServlet {
+    private FilmeDAO filmeDAO = new FilmeDAO();
 
-	        request.setAttribute("filme", filmeSelecionado);
-	        
-	        request.getRequestDispatcher("/editar-filme.jsp").forward(request, response);
-	    }
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Filme filme = filmeDAO.getFilme(id);
+        request.setAttribute("filme", filme);
+        request.getRequestDispatcher("/editar-filme.jsp").forward(request, response);
+    }
 
-	    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-	            throws ServletException, IOException {
-	        
-	        int id = Integer.parseInt(request.getParameter("id"));
-	        String titulo = request.getParameter("titulo");
-	        String diretor = request.getParameter("diretor");
-	        int anoLancamento = Integer.parseInt(request.getParameter("anoLancamento"));
-	        String sinopse = request.getParameter("sinopse");
-	        String idioma = request.getParameter("idioma");
-	        String formato = request.getParameter("formato");
-	        int duracao = Integer.parseInt(request.getParameter("duracao"));
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String titulo = request.getParameter("titulo");
+        String diretor = request.getParameter("diretor");
+        int anoLancamento = Integer.parseInt(request.getParameter("anoLancamento"));
+        String sinopse = request.getParameter("sinopse");
+        String idioma = request.getParameter("idioma");
+        String formato = request.getParameter("formato");
+        int duracao = Integer.parseInt(request.getParameter("duracao"));
 
-	        List<Filme> filmes = (List<Filme>) getServletContext().getAttribute("filmes");
-	        
-	        for (Filme filme : filmes) {
-	            if (filme.getId() == id) {
-	                filme.setTitulo(titulo);
-	                filme.setDiretor(diretor);
-	                filme.setAnoLancamento(anoLancamento);
-	                filme.setSinopse(sinopse);
-	                filme.setIdioma(idioma);
-	                filme.setFormato(formato);
-	                filme.setDuracao(duracao);
-	                break;
-	            }
-	        }
+        String imagemPath = null;
+        Part imagemPart = request.getPart("imagem");
+        if (imagemPart.getSize() > 0) { // Verifica se uma nova imagem foi enviada
+            imagemPath = "../imagem" + imagemPart.getSubmittedFileName();
+            imagemPart.write(imagemPath); // Salvar a nova imagem no servidor
+        } else {
+            // Manter a imagem atual se nenhuma nova imagem for enviada
+            Filme filmeAtual = filmeDAO.getFilme(id);
+            imagemPath = filmeAtual.getImagem();
+        }
 
-	        response.sendRedirect("listar-filmes");
-	    }
+        Filme filmeAtualizado = new Filme(id, titulo, diretor, anoLancamento, sinopse, idioma, formato, duracao, imagemPath);
+        filmeDAO.updateFilme(filmeAtualizado);
+
+        response.sendRedirect("listar-filmes");
+    }
 }
