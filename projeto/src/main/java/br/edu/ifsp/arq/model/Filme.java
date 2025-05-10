@@ -9,8 +9,9 @@ public class Filme {
     private String idioma;
     private String formato;
     private int duracao;
-
-    public Filme(int id, String titulo, String diretor, int anoLancamento, String sinopse, String idioma, String formato, int duracao) {
+    private String imagem; 
+    
+    public Filme(int id, String titulo, String diretor, int anoLancamento, String sinopse, String idioma, String formato, int duracao, String imagem) {
         this.id = id;
         this.titulo = titulo;
         this.diretor = diretor;
@@ -19,6 +20,7 @@ public class Filme {
         this.idioma = idioma;
         this.formato = formato;
         this.duracao = duracao;
+        this.imagem = imagem;
     }
 
     public int getId() {
@@ -83,5 +85,13 @@ public class Filme {
 
     public void setDuracao(int duracao) {
         this.duracao = duracao;
+    }
+
+    public String getImagem() {
+        return imagem;
+    }
+    
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
     }
 }
