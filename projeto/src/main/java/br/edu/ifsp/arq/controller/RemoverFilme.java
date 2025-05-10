@@ -1,4 +1,5 @@
 package br.edu.ifsp.arq.controller;
+import br.edu.ifsp.arq.dao.FilmeDAO;
 import br.edu.ifsp.arq.model.Filme;
 
 import java.io.IOException;

@@ -9,18 +9,6 @@
     Filme filme = filmeDAO.getFilme(id);
 %>
 
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Filmes</a>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item"><a class="nav-link" href="home.jsp">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="sobreSistema.jsp">Sobre o Sistema</a></li>
-                <li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>
-            </ul>
-        </div>
-    </nav>
-
     <div class="container mt-4">
         <h1>Editar Filme</h1>
         <form action="atualizar-filme" method="post">
