@@ -11,23 +11,21 @@ import javax.servlet.http.HttpServletResponse;
 
 
 @WebServlet("/excluir-filme")
-public class RemoverFilme extends HttpServlet{
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+public class RemoverFilme extends HttpServlet {
+    private FilmeDAO filmeDAO = new FilmeDAO();
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String titulo = request.getParameter("titulo");
-
-        List<Filme> filmes = (List<Filme>) getServletContext().getAttribute("filmes");
-
-        if (filmes != null) {
-            for (int i = 0; i < filmes.size(); i++) {
-                if (filmes.get(i).getTitulo().equalsIgnoreCase(titulo)) {
-                    filmes.remove(i);
-                    break;
-                }
-            }
+        int id = Integer.parseInt(request.getParameter("id"));
+        Filme filme = filmeDAO.getFilme(id);
+        
+        // Remover a imagem do servidor, se necessário
+        File imagemFile = new File(filme.getImagem());
+        if (imagemFile.exists()) {
+            imagemFile.delete(); // Deletar a imagem do servidor
         }
 
+        filmeDAO.removeFilme(id);
         response.sendRedirect("listar-filmes");
     }
 }
