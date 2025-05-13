@@ -52,6 +52,7 @@ public class FilmeDAO {
 	    for (Filme f : filmes) {
 	    	if(f.getId() == filmeAtualizado.getId()) {
 	    		f.setTitulo(filmeAtualizado.getTitulo());
+	    		f.setDiretor(filmeAtualizado.getDiretor());
 	    		f.setSinopse(filmeAtualizado.getSinopse());
 	    		f.setAnoLancamento(filmeAtualizado.getAnoLancamento());
 	    		f.setIdioma(filmeAtualizado.getIdioma());
@@ -66,5 +67,3 @@ public class FilmeDAO {
 	    return false;
 	}
 }
-
-
