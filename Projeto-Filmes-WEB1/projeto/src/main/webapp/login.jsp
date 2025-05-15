@@ -4,15 +4,26 @@
 <div class="container mt-5">
     <h1 class="text-center">Login</h1>
 
-    <form action="login" method="POST">
+    <%
+        String errMessage = (String) request.getAttribute("errMessage");
+        if (errMessage != null) {
+    %>
+        <div class="alert alert-danger text-center">
+            <%= errMessage %>
+        </div>
+    <%
+        }
+    %>
+
+    <form action="LoginServlet" method="POST">
         <div class="form-group">
-            <label for="username">Usuário</label>
-            <input type="text" class="form-control" id="username" name="username" required>
+            <label for="email">E-mail</label>
+            <input type="email" class="form-control" id="email" name="email" required>
         </div>
 
         <div class="form-group">
-            <label for="password">Senha</label>
-            <input type="password" class="form-control" id="password" name="password" required>
+            <label for="senha">Senha</label>
+            <input type="password" class="form-control" id="senha" name="senha" required>
         </div>
 
         <button type="submit" class="btn btn-primary">Entrar</button>
