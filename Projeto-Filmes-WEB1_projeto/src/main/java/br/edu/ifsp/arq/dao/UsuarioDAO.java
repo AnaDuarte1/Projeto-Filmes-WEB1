@@ -7,100 +7,84 @@ import java.util.*;
 
 public class UsuarioDAO {
 
-  private static final File dir = new File("/data");
-  private static final File arq = new File(dir, "usuarios.txt");
+    private static final File dir = new File("C:\\ana\\Projeto-Filmes-WEB1-main\\Projeto-Filmes-WEB1_projeto\\data");
+    private static final File arq = new File(dir, "usuarios.txt");
 
-  private List<Usuario> carregarUsuarios() {
-    List<Usuario> usuarios = new ArrayList<>();
+    private List<Usuario> carregarUsuarios() {
+        List<Usuario> usuarios = new ArrayList<>();
 
-    if (!arq.exists()) {
-      return usuarios;
-    }
-
-    FileReader fileReader = null;
-    BufferedReader bufferedReader = null;
-
-    try {
-      fileReader = new FileReader(arq);
-      bufferedReader = new BufferedReader(fileReader);
-
-      String linha;
-      while ((linha = bufferedReader.readLine()) != null) {
-        if (!linha.isEmpty()) {
-          String[] partes = linha.split(";");
-          if (partes.length == 3) {
-            usuarios.add(new Usuario(
-              partes[0],
-              partes[1].trim(), 
-              partes[2].trim()
-            ));
-          }
+        // Verifica se o diretório existe, se não, cria
+        if (!dir.exists()) {
+            dir.mkdirs();
         }
-      }
 
-    } catch (IOException e) {
-      e.printStackTrace();
-    } finally {
-      try {
-        if (bufferedReader != null) bufferedReader.close();
-        if (fileReader != null) fileReader.close();
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
+        // Verifica se o arquivo existe, se não, cria
+        if (!arq.exists()) {
+            try {
+                arq.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Lê os usuários do arquivo
+        try (FileReader fileReader = new FileReader(arq);
+             BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+
+            String linha;
+            while ((linha = bufferedReader.readLine()) != null) {
+                if (!linha.isEmpty()) {
+                    String[] partes = linha.split("\\|"); // Usando o mesmo separador
+                    if (partes.length == 3) {
+                        usuarios.add(new Usuario(
+                                partes[0],
+                                partes[1].trim(),
+                                partes[2].trim()
+                        ));
+                    }
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return usuarios;
     }
 
-    return usuarios;
-  }
+    public boolean salvarUsuario(Usuario usuario) {
+        List<Usuario> usuarios = carregarUsuarios();
 
-  public boolean salvarUsuario(Usuario usuario) {
-    List<Usuario> usuarios = carregarUsuarios();
+        for (Usuario u : usuarios) {
+            if (u.getEmail().equalsIgnoreCase(usuario.getEmail())) {
+                return false; 
+            }
+        }
 
-    for (Usuario u : usuarios) {
-      if (u.getEmail().equalsIgnoreCase(usuario.getEmail())) {
-        return false; 
-      }
+        // Salva o novo usuário no arquivo
+        try (FileWriter fileWriter = new FileWriter(arq, true);
+             PrintWriter printWriter = new PrintWriter(fileWriter)) {
+
+            printWriter.print(usuario.getNome() + "|");
+            printWriter.print(usuario.getEmail() + "|");
+            printWriter.println(usuario.getSenha());
+
+            return true;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
-    if (!dir.exists()) {
-      dir.mkdirs();
+    public boolean autenticar(String email, String senha) {
+        List<Usuario> usuarios = carregarUsuarios();
+
+        for (Usuario u : usuarios) {
+            if (u.getEmail().equals(email) && u.getSenha().equals(senha)) {
+                return true;
+            }
+        }
+        return false;
     }
-
-    FileWriter fileWriter = null;
-    PrintWriter printWriter = null;
-
-    try {
-      fileWriter = new FileWriter(arq, true);
-      printWriter = new PrintWriter(fileWriter);
-
-      printWriter.print(usuario.getNome() + "|");
-      printWriter.print(usuario.getEmail() + "|");
-      printWriter.println(usuario.getSenha());
-
-      printWriter.flush();
-      return true;
-
-    } catch (IOException e) {
-      e.printStackTrace();
-      return false;
-
-    } finally {
-      if (printWriter != null) printWriter.close();
-      try {
-        if (fileWriter != null) fileWriter.close();
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }
-  }
-
-  public boolean autenticar(String email, String senha) {
-    List<Usuario> usuarios = carregarUsuarios();
-
-    for (Usuario u : usuarios) {
-      if (u.getEmail().equals(email) && u.getSenha().equals(senha)) {
-        return true;
-      }
-    }
-    return false;
-  }
 }

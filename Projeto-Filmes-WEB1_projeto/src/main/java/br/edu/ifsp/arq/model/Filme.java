@@ -11,7 +11,7 @@ public class Filme {
     private int duracao;
     private String imagem; 
     
-    public Filme(String titulo, String diretor, int anoLancamento, String sinopse, String idioma, String formato, int duracao, String imagem) {
+    public Filme(String titulo, String diretor, int anoLancamento, String sinopse, String idioma, String formato, int duracao, String imagem, int id) {
         this.id = id;
         this.titulo = titulo;
         this.diretor = diretor;

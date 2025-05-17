@@ -7,6 +7,7 @@
     </div>
 </c:if>
 <%@ include file="header.jsp" %>
+
     <style>
         body {
             padding: 20px;

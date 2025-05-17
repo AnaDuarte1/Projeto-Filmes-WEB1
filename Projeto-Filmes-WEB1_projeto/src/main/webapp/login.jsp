@@ -6,11 +6,19 @@
 
     <%
         String errMessage = (String) request.getAttribute("errMessage");
+        String successMessage = (String) request.getAttribute("successMessage");
         if (errMessage != null) {
     %>
-        <div class="alert alert-danger text-center">
-            <%= errMessage %>
-        </div>
+        <script>
+            alert("<%= errMessage %>"); // Exibe um alert com a mensagem de erro
+        </script>
+    <%
+        }
+        if (successMessage != null) {
+    %>
+        <script>
+            alert("<%= successMessage %>"); // Exibe um alert com a mensagem de sucesso
+        </script>
     <%
         }
     %>

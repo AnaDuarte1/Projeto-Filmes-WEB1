@@ -1,12 +1,11 @@
 package br.edu.ifsp.arq.controller;
+
 import br.edu.ifsp.arq.dao.FilmeDAO;
 import br.edu.ifsp.arq.model.Filme;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -15,11 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-
 @WebServlet("/criar-filme")
 @MultipartConfig
 public class AdicionarFilme extends HttpServlet {
-    private FilmeDAO filmeDAO = FilmeDAO.getInstance(); // Usando o singleton
+    private FilmeDAO filmeDAO = FilmeDAO.getInstance(); 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
@@ -56,7 +54,7 @@ public class AdicionarFilme extends HttpServlet {
             String imagemPath = null;
             
             if (imagemPart != null && imagemPart.getSize() > 0) {
-                String uploadPath = getServletContext().getRealPath("") + File.separator + "uploads";
+                String uploadPath = getServletContext().getRealPath("") + File.separator + "imagens";
                 File uploadDir = new File(uploadPath);
                 if (!uploadDir.exists()) uploadDir.mkdir();
                 
@@ -65,10 +63,10 @@ public class AdicionarFilme extends HttpServlet {
                 imagemPart.write(imagemPath);
                 
                 // Armazenar apenas o caminho relativo
-                imagemPath = "uploads/" + fileName;
+                imagemPath = "imagens/" + fileName;
             }
 
-            Filme novoFilme = new Filme(titulo, diretor, anoLancamento, sinopse, idioma, formato, duracao, imagemPath);
+            Filme novoFilme = new Filme(titulo, diretor, anoLancamento, sinopse, idioma, formato, duracao, imagemPath, duracao);
             novoFilme.setTitulo(titulo);
             novoFilme.setDiretor(diretor);
             novoFilme.setSinopse(sinopse);
@@ -81,12 +79,13 @@ public class AdicionarFilme extends HttpServlet {
             // Adicionar ao DAO
             filmeDAO.adicionarFilme(novoFilme);
 
-            response.sendRedirect(request.getContextPath() + "/visualizar-filme.jsp");
+            response.sendRedirect("visualizar-filme?id=" + novoFilme.getId());
+
             
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("error", "Erro ao processar o formulário: " + e.getMessage());
-            request.getRequestDispatcher("/adicionar.jsp").forward(request, response);
+            request.getRequestDispatcher("/casastrar.jsp").forward(request, response);
         }
     }
 }

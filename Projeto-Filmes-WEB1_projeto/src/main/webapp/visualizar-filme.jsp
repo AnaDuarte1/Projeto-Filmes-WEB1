@@ -3,11 +3,6 @@
 <%@ page import="br.edu.ifsp.arq.model.Filme" %>
 <%@ page import="br.edu.ifsp.arq.dao.FilmeDAO" %>
 
-<%
-    FilmeDAO filmeDAO = new FilmeDAO();
-    int id = Integer.parseInt(request.getParameter("id"));
-    Filme filme = filmeDAO.buscarPorId(id);
-%>
 
  <div class="container mt-5">
         <div class="card">
@@ -17,9 +12,9 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-4">
-                        <c:if test="${not empty filme.imagemPath}">
-                            <img src="${filme.imagemPath}" class="img-fluid" alt="Capa do filme">
-                        </c:if>
+                        <c:if test="${not empty filme.imagem}">
+    						<img src="${filme.imagem}" class="img-fluid" alt="Capa do filme">
+						</c:if>
                     </div>
                     <div class="col-md-8">
                         <dl class="row">
@@ -44,11 +39,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card-footer text-end">
-                <a href="visualizar-filme?id=${filme.id}" class="btn btn-sm btn-info">
-    <i class="bi bi-eye"></i> Detalhes
-</a>
-            </div>
+          </div>
         </div>
     </div>
 

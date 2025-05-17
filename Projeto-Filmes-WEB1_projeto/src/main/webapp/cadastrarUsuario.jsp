@@ -1,31 +1,38 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="header.jsp" %>
 
 <div class="container mt-5">
-    <h2>Cadastro de Usuário</h2>
+    <h1 class="text-center">Cadastro</h1>
 
-    <form action="cadastrar" method="post">
+    <%
+        String errMessage = (String) request.getAttribute("errMessage");
+        if (errMessage != null) {
+    %>
+        <script>
+            alert("<%= errMessage %>"); // Exibe um alert com a mensagem de erro
+        </script>
+    <%
+        }
+    %>
+
+    <form action="cadastrar" method="POST">
         <div class="form-group">
-            <label for="nome">Nome:</label>
-            <input type="text" class="form-control" name="nome" required>
+            <label for="nome">Nome</label>
+            <input type="text" class="form-control" id="nome" name="nome" required>
         </div>
 
         <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" class="form-control" name="email" required>
+            <label for="email">E-mail</label>
+            <input type="email" class="form-control" id="email" name="email" required>
         </div>
 
         <div class="form-group">
-            <label for="senha">Senha:</label>
-            <input type="password" class="form-control" name="senha" required>
+            <label for="senha">Senha</label>
+            <input type="password" class="form-control" id="senha" name="senha" required>
         </div>
 
         <button type="submit" class="btn btn-primary">Cadastrar</button>
     </form>
-
-    <div class="mt-3">
-        <p style="color: red;"><%= request.getAttribute("mensagem") != null ? request.getAttribute("mensagem") : "" %></p>
-    </div>
 </div>
 
 <%@ include file="footer.jsp" %>

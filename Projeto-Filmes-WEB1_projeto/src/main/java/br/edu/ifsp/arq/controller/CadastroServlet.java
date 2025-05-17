@@ -30,10 +30,10 @@ public class CadastroServlet extends HttpServlet {
         Usuario novoUsuario = new Usuario(nome, email, senha);
 
         if (usuarioDAO.salvarUsuario(novoUsuario)) {
-            request.setAttribute("mensagem", "Usuário cadastrado com sucesso!");
+            request.setAttribute("successMessage", "Usuário cadastrado com sucesso!");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
-            request.setAttribute("mensagem", "Erro: usuário já existe!");
+            request.setAttribute("errMessage", "Erro: usuário já existe!"); 
             request.getRequestDispatcher("cadastrarUsuario.jsp").forward(request, response);
         }
     }

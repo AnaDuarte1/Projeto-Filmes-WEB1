@@ -18,13 +18,13 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="listar-filmes">Listar Filmes</a>
+                <a class="nav-link" href="listar-filmes.jsp">Listar Filmes</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="sobre-sistema">Sobre</a>
+                <a class="nav-link" href="sobreSistema.jsp">Sobre</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="login">Login</a>
+                <a class="nav-link" href="logout">logout</a> 
             </li>
         </ul>
     </div>

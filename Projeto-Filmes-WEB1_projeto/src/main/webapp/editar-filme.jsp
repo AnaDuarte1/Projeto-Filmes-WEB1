@@ -11,7 +11,7 @@
 
     <div class="container mt-4">
         <h1>Editar Filme</h1>
-        <form action="atualizar-filme" method="post">
+        <form action="/atualizar-filme" method="post">
             <input type="hidden" name="id" value="<%= filme.getId() %>">
             <div class="form-group">
                 <label for="titulo">Título</label>

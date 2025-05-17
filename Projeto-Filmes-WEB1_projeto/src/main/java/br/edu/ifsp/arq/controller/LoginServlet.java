@@ -19,17 +19,16 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      String email = request.getParameter("username");
-      String senha = request.getParameter("password");
+        String email = request.getParameter("email"); 
+        String senha = request.getParameter("senha"); 
 
-      if (usuarioDAO.autenticar(email, senha)) {
-        HttpSession session = request.getSession();
-        session.setAttribute("usuarioLogado", email);
-
-        response.sendRedirect("home.jsp");  
-      } else {
-        request.setAttribute("mensagem", "Email ou senha inválidos!");
-        request.getRequestDispatcher("login.jsp").forward(request, response);
-      }
+        if (usuarioDAO.autenticar(email, senha)) {
+            HttpSession session = request.getSession();
+            session.setAttribute("usuarioLogado", email);
+            response.sendRedirect("home.jsp");  
+        } else {
+            request.setAttribute("errMessage", "Email ou senha inválidos!"); 
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        }
     }
 }
