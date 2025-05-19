@@ -59,8 +59,8 @@ O **CineWeb** é um sistema web completo para gerenciamento de catálogo de film
 ## 🚀 Como Executar
 
 1. **Pré-requisitos**:
-   - JDK 17+
-   - Apache Tomcat 10+
+   - JDK
+   - Apache Tomcat 
    - Navegador moderno
 
 2. **Configuração**:
