@@ -1,41 +1,96 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="header.jsp" %>
-
-<div class="container mt-5">
-    <h1 class="text-center">Login</h1>
-
-    <%
-        String errMessage = (String) request.getAttribute("errMessage");
-        String successMessage = (String) request.getAttribute("successMessage");
-        if (errMessage != null) {
-    %>
-        <script>
-            alert("<%= errMessage %>"); // Exibe um alert com a mensagem de erro
-        </script>
-    <%
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - CineWeb</title>
+    <%@ include file="cabecalho.jsp" %>
+    <style>
+        .login-container {
+            max-width: 500px;
+            margin: 5rem auto;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(13, 110, 253, 0.1);
+            background-color: white;
         }
-        if (successMessage != null) {
-    %>
-        <script>
-            alert("<%= successMessage %>"); // Exibe um alert com a mensagem de sucesso
-        </script>
-    <%
+        .login-header {
+            color: var(--dark-blue);
+            text-align: center;
+            margin-bottom: 2rem;
         }
-    %>
-
-    <form action="login" method="POST">
-        <div class="form-group">
-            <label for="email">E-mail</label>
-            <input type="email" class="form-control" id="email" name="email" required>
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+        .btn-login {
+            background-color: var(--primary-color);
+            border: none;
+            padding: 10px 0;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .btn-login:hover {
+            background-color: var(--dark-blue);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container">
+        <div class="login-container shadow">
+            <div class="login-header">
+                <h2><i class="fas fa-film me-2"></i>CineWeb</h2>
+                <p class="text-muted">Acesse sua conta para gerenciar o catálogo</p>
+            </div>
+            
+            <c:if test="${not empty errMessage}">
+                <div class="alert alert-danger alert-dismissible fade show">
+                    ${errMessage}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            </c:if>
+            
+            <c:if test="${not empty successMessage}">
+                <div class="alert alert-success alert-dismissible fade show">
+                    ${successMessage}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            </c:if>
+            
+            <form action="login" method="POST">
+                <div class="mb-4">
+                    <label for="email" class="form-label">E-mail</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                        <input type="email" class="form-control" id="email" name="email" 
+                               placeholder="seu@email.com" required>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="senha" class="form-label">Senha</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                        <input type="password" class="form-control" id="senha" name="senha" 
+                               placeholder="Sua senha" required>
+                    </div>
+                </div>
+                
+                <div class="d-grid gap-2 mb-3">
+                    <button type="submit" class="btn btn-primary btn-login">
+                        <i class="fas fa-sign-in-alt me-2"></i>Entrar
+                    </button>
+                </div>
+                
+                <div class="text-center">
+                    <p class="mb-1">Não tem uma conta? <a href="cadastrar.jsp">Cadastre-se</a></p>
+                    <p><a href="#">Esqueceu sua senha?</a></p>
+                </div>
+            </form>
         </div>
-
-        <div class="form-group">
-            <label for="senha">Senha</label>
-            <input type="password" class="form-control" id="senha" name="senha" required>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Entrar</button>
-    </form>
-</div>
-
-<%@ include file="footer.jsp" %>
+    </div>
+    
+    <%@ include file="rodape.jsp" %>
+</body>
+</html>
