@@ -17,16 +17,11 @@ public class ListarServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        // Obtém a lista de filmes do DAO
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         FilmeDAO filmeDAO = FilmeDAO.getInstance();
-        List<Filme> filmes = filmeDAO.carregarFilmes(); // Corrigido para chamar o método correto
-
-        // Define a lista de filmes como atributo da requisição
+        filmeDAO.carregarFilmes(); 
+        List<Filme> filmes = filmeDAO.getFilmes(); 
         request.setAttribute("filmes", filmes);
-
-        // Redireciona para a página listar-filmes.jsp
         request.getRequestDispatcher("listar-filmes.jsp").forward(request, response);
     }
 }
