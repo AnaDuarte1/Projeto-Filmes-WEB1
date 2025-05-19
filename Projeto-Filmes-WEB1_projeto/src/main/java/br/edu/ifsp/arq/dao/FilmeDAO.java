@@ -18,18 +18,17 @@ public class FilmeDAO {
     public FilmeDAO() {
         filmes = new ArrayList<>();
         proximoId = 1;
-        carregarFilmes(); // Carrega filmes do arquivo ao inicializar
+        carregarFilmes();
     }
 
     public List<Filme> carregarFilmes() {
-        List<Filme> filmes = new ArrayList<>();
+    	filmes = new ArrayList<>(); 
+//        List<Filme> filmes = new ArrayList<>(); cria uma lista nova local, não a da instância
 
-        // Verifica se o diretório existe, se não, cria
         if (!dir.exists()) {
             dir.mkdirs();
         }
 
-        // Verifica se o arquivo existe, se não, cria
         if (!arq.exists()) {
             try {
                 arq.createNewFile();
@@ -38,29 +37,28 @@ public class FilmeDAO {
             }
         }
 
-        // Lê os filmes do arquivo
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(arq))) {
             String linha;
             while ((linha = bufferedReader.readLine()) != null) {
                 if (!linha.isEmpty()) {
                     String[] partes = linha.split("\\|");
-                    if (partes.length == 8) { // Verifica se a linha tem o número correto de partes
+                    if (partes.length == 8) { 
                         Filme filme = new Filme(
-                            partes[0], // Título
-                            partes[1], // Diretor
-                            Integer.parseInt(partes[2]), // Ano de Lançamento
-                            partes[3], // Sinopse
-                            partes[4], // Idioma
-                            partes[5], // Formato
-                            Integer.parseInt(partes[6]), // Duração
-                            partes[7], // Imagem
-                            proximoId++ // ID gerado automaticamente
+                            partes[0],
+                            partes[1], 
+                            Integer.parseInt(partes[2]), 
+                            partes[3], 
+                            partes[4], 
+                            partes[5], 
+                            Integer.parseInt(partes[6]), 
+                            partes[7], 
+                            proximoId++ 
                         );
-                        filmes.add(filme); // Adiciona o filme à lista
+                        filmes.add(filme); 
                         System.out.println("Carregando filmes do arquivo: " + arq.getAbsolutePath());
 
                     } else {
-                        System.out.println("Linha inválida: " + linha); // Log para linhas inválidas
+                        System.out.println("Linha inválida: " + linha); 
                     }
                 }
             }
@@ -68,14 +66,14 @@ public class FilmeDAO {
             e.printStackTrace();
         }
 
-        return filmes; // Retorna a lista de filmes
+        return filmes; 
     }
 
 
     public boolean adicionarFilme(Filme filme) {
         filme.setId(proximoId++);
         filmes.add(filme);
-        return salvarFilmes(); // Salva a lista de filmes no arquivo
+        return salvarFilmes();
     }
 
     public boolean salvarFilmes() {
@@ -103,6 +101,11 @@ public class FilmeDAO {
         }
         return instance;
     }
+    
+    public List<Filme> getFilmes() {
+        return filmes;
+    }
+
 
     public Filme buscarPorId(int id) {
         for (Filme f : filmes) {
