@@ -13,11 +13,11 @@
             </div>
             
             <div class="col-md-4 mb-4 mb-md-0">
-                <h5 class="text-primary mb-3">Links Úteis</h5>
+                <h5 class="text-primary mb-3">Links Uteis</h5>
                 <ul class="list-unstyled">
-                    <li class="mb-2"><a href="listar-filmes" class="text-white text-decoration-none">Catálogo de Filmes</a></li>
-                    <li class="mb-2"><a href="sobre.jsp" class="text-white text-decoration-none">Sobre o Sistema</a></li>
-                    <li class="mb-2"><a href="adicionar.jsp" class="text-white text-decoration-none">Adicionar Filme</a></li>
+                    <li class="mb-2"><a href="listar-filmes.jsp" class="text-white text-decoration-none">Catalogo de Filmes</a></li>
+                    <li class="mb-2"><a href="sobreSistema.jsp" class="text-white text-decoration-none">Sobre o Sistema</a></li>
+                    <li class="mb-2"><a href="cadastrar.jsp" class="text-white text-decoration-none">Adicionar Filme</a></li>
                     <li><a href="login.jsp" class="text-white text-decoration-none">Área do Administrador</a></li>
                 </ul>
             </div>
@@ -39,7 +39,7 @@
                 <p class="mb-0">&copy; 2025 <span class="text-primary">CineWeb</span>. Todos os direitos reservados.</p>
             </div>
             <div class="col-md-6 text-center text-md-end">
-                <p class="mb-0">Desenvolvido por <span class="text-primary">Ana Beatriz, Rafael e Otávio</span> - IFSP</p>
+                <p class="mb-0">Desenvolvido por <span class="text-primary">Ana Beatriz, Rafael e Otavio</span> - IFSP</p>
             </div>
         </div>
     </div>

@@ -123,7 +123,7 @@
         </div>
     </div>
     
-    <%@ include file="rodape.jsp" %>
+    <%@ include file="footer.jsp" %>
     
     <script>
         // Validação básica do formulário

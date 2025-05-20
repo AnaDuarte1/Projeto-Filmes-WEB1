@@ -4,7 +4,7 @@
 <html>
 <head>
     <title>Login - CineWeb</title>
-    <%@ include file="cabecalho.jsp" %>
+    <%@ include file="header.jsp" %>
     <style>
         .login-container {
             max-width: 500px;
@@ -91,6 +91,6 @@
         </div>
     </div>
     
-    <%@ include file="rodape.jsp" %>
+    <%@ include file="footer.jsp" %>
 </body>
 </html>

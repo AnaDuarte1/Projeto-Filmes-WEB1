@@ -58,19 +58,19 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item ${param.activePage == 'filmes' ? 'active' : ''}">
-                        <a class="nav-link" href="listar-filmes">
-                            <i class="fas fa-list me-1"></i> Catálogo
+                        <a class="nav-link" href="listar-filmes.jsp">
+                            <i class="fas fa-list me-1"></i> Catalogo
                         </a>
                     </li>
                     <c:if test="${not empty sessionScope.usuarioLogado}">
                         <li class="nav-item ${param.activePage == 'adicionar' ? 'active' : ''}">
-                            <a class="nav-link" href="adicionar.jsp">
+                            <a class="nav-link" href="cadastrar.jsp">
                                 <i class="fas fa-plus-circle me-1"></i> Adicionar Filme
                             </a>
                         </li>
                     </c:if>
                     <li class="nav-item ${param.activePage == 'sobre' ? 'active' : ''}">
-                        <a class="nav-link" href="sobre.jsp">
+                        <a class="nav-link" href="sobreSistema.jsp">
                             <i class="fas fa-info-circle me-1"></i> Sobre
                         </a>
                     </li>
