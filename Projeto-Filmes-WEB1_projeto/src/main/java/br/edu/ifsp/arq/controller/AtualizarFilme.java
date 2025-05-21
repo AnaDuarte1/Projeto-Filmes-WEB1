@@ -17,49 +17,68 @@ import javax.servlet.http.Part;
 @WebServlet({"/editar-filme", "/atualizar-filme"})
 @MultipartConfig
 public class AtualizarFilme extends HttpServlet {
-    private FilmeDAO filmeDAO = new FilmeDAO();
+    private final FilmeDAO filmeDAO = FilmeDAO.getInstance(); // Usar Singleton
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        Filme filme = filmeDAO.buscarPorId(id);
-        request.setAttribute("filme", filme);
-        request.getRequestDispatcher("/editar-filme.jsp").forward(request, response);
+        try {
+            int id = Integer.parseInt(request.getParameter("id"));
+            Filme filme = filmeDAO.buscarPorId(id);
+            if (filme == null) {
+                response.sendRedirect("listar-filmes?error=Filme não encontrado");
+                return;
+            }
+            request.setAttribute("filme", filme);
+            request.getRequestDispatcher("/editar-filme.jsp").forward(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendRedirect("listar-filmes?error=Erro ao carregar filme");
+        }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        String titulo = request.getParameter("titulo");
-        String diretor = request.getParameter("diretor");
-        int anoLancamento = Integer.parseInt(request.getParameter("anoLancamento"));
-        String sinopse = request.getParameter("sinopse");
-        String idioma = request.getParameter("idioma");
-        String formato = request.getParameter("formato");
-        int duracao = Integer.parseInt(request.getParameter("duracao"));
-
-        String imagemPath = null;
-        Part imagemPart = request.getPart("imagem");
-        if (imagemPart.getSize() > 0) { // Verifica se uma nova imagem foi enviada
-            String uploadPath = getServletContext().getRealPath("") + File.separator + "imagens";
-            File uploadDir = new File(uploadPath);
-            if (!uploadDir.exists()) uploadDir.mkdir();
-            
-            String fileName = Paths.get(imagemPart.getSubmittedFileName()).getFileName().toString();
-            imagemPath = uploadPath + File.separator + fileName;
-            imagemPart.write(imagemPath);
-            
-            // Armazenar apenas o caminho relativo
-            imagemPath = "imagens/" + fileName;
-        } else {
-            // Manter a imagem atual se nenhuma nova imagem for enviada
+        try {
+            int id = Integer.parseInt(request.getParameter("id"));
             Filme filmeAtual = filmeDAO.buscarPorId(id);
-            imagemPath = filmeAtual.getImagem();
+            if (filmeAtual == null) {
+                response.sendRedirect("listar-filmes?error=Filme não encontrado");
+                return;
+            }
+
+            // Processar upload de nova imagem se fornecida
+            Part imagemPart = request.getPart("imagem");
+            String imagemPath = filmeAtual.getImagem(); // Mantém a imagem atual por padrão
+            
+            if (imagemPart != null && imagemPart.getSize() > 0) {
+                String uploadPath = getServletContext().getRealPath("") + File.separator + "imagens";
+                File uploadDir = new File(uploadPath);
+                if (!uploadDir.exists()) uploadDir.mkdir();
+                
+                String fileName = Paths.get(imagemPart.getSubmittedFileName()).getFileName().toString();
+                imagemPath = "imagens/" + fileName; // Caminho relativo
+                imagemPart.write(uploadPath + File.separator + fileName);
+            }
+
+            // Criar filme atualizado
+            Filme filmeAtualizado = new Filme(
+                request.getParameter("titulo"),
+                request.getParameter("diretor"),
+                Integer.parseInt(request.getParameter("anoLancamento")),
+                request.getParameter("sinopse"),
+                request.getParameter("idioma"),
+                request.getParameter("formato"),
+                Integer.parseInt(request.getParameter("duracao")),
+                imagemPath,
+                id // Manter o mesmo ID
+            );
+
+            filmeDAO.atualizarFilme(filmeAtualizado);
+            response.sendRedirect("listar-filmes");
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendRedirect("listar-filmes?error=Erro ao atualizar filme");
         }
-
-        Filme filmeAtualizado = new Filme(titulo, diretor, anoLancamento, sinopse, idioma, formato, duracao, imagemPath, duracao);
-        filmeDAO.atualizarFilme(filmeAtualizado);
-
-        response.sendRedirect("listar-filmes");
     }
 }

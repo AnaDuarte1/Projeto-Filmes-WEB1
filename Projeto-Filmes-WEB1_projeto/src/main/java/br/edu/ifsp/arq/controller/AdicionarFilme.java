@@ -17,39 +17,13 @@ import javax.servlet.http.Part;
 @WebServlet("/criar-filme")
 @MultipartConfig
 public class AdicionarFilme extends HttpServlet {
-    private FilmeDAO filmeDAO = FilmeDAO.getInstance(); 
+    private final FilmeDAO filmeDAO = FilmeDAO.getInstance();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         
         try {
-            // Obter parâmetros do formulário
-            String titulo = request.getParameter("titulo");
-            String diretor = request.getParameter("diretor");
-            String sinopse = request.getParameter("sinopse");
-            String idioma = request.getParameter("idioma");
-            String formato = request.getParameter("formato");
-            
-            // Converter parâmetros numéricos com validação
-            int anoLancamento = 0;
-            try {
-                anoLancamento = Integer.parseInt(request.getParameter("anoLancamento"));
-            } catch (NumberFormatException e) {
-                request.setAttribute("error", "Ano de lançamento inválido");
-                request.getRequestDispatcher("/adicionar.jsp").forward(request, response);
-                return;
-            }
-            
-            int duracao = 0;
-            try {
-                duracao = Integer.parseInt(request.getParameter("duracao"));
-            } catch (NumberFormatException e) {
-                request.setAttribute("error", "Duração inválida");
-                request.getRequestDispatcher("/adicionar.jsp").forward(request, response);
-                return;
-            }
-
-            // Processar a imagem
+            // Processar upload de imagem
             Part imagemPart = request.getPart("imagem");
             String imagemPath = null;
             
@@ -59,33 +33,30 @@ public class AdicionarFilme extends HttpServlet {
                 if (!uploadDir.exists()) uploadDir.mkdir();
                 
                 String fileName = Paths.get(imagemPart.getSubmittedFileName()).getFileName().toString();
-                imagemPath = uploadPath + File.separator + fileName;
-                imagemPart.write(imagemPath);
-                
-                // Armazenar apenas o caminho relativo
-                imagemPath = "imagens/" + fileName;
+                imagemPath = "imagens/" + fileName; // Caminho relativo
+                imagemPart.write(uploadPath + File.separator + fileName);
             }
 
-            Filme novoFilme = new Filme(titulo, diretor, anoLancamento, sinopse, idioma, formato, duracao, imagemPath, duracao);
-            novoFilme.setTitulo(titulo);
-            novoFilme.setDiretor(diretor);
-            novoFilme.setSinopse(sinopse);
-            novoFilme.setAnoLancamento(anoLancamento);
-            novoFilme.setIdioma(idioma);
-            novoFilme.setFormato(formato);
-            novoFilme.setDuracao(duracao);
-            novoFilme.setImagem(imagemPath);
+            // Criar novo filme
+            Filme novoFilme = new Filme(
+                request.getParameter("titulo"),
+                request.getParameter("diretor"),
+                Integer.parseInt(request.getParameter("anoLancamento")),
+                request.getParameter("sinopse"),
+                request.getParameter("idioma"),
+                request.getParameter("formato"),
+                Integer.parseInt(request.getParameter("duracao")),
+                imagemPath,
+                0 // ID será gerado pelo DAO
+            );
 
-            // Adicionar ao DAO
             filmeDAO.adicionarFilme(novoFilme);
-
-            response.sendRedirect("visualizar-filme?id=" + novoFilme.getId());
-
+            response.sendRedirect("listar-filmes");
             
         } catch (Exception e) {
             e.printStackTrace();
-            request.setAttribute("error", "Erro ao processar o formulário: " + e.getMessage());
-            request.getRequestDispatcher("/casastrar.jsp").forward(request, response);
+            request.setAttribute("error", "Erro ao adicionar filme: " + e.getMessage());
+            request.getRequestDispatcher("/adicionar.jsp").forward(request, response);
         }
     }
 }

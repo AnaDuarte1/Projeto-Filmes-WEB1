@@ -1,101 +1,52 @@
 package br.edu.ifsp.arq.dao;
 
 import br.edu.ifsp.arq.model.Filme;
-
-import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class FilmeDAO {
-
-    private static final File dir = new File("C:\\ana\\Projeto-Filmes-WEB1-main\\Projeto-Filmes-WEB1_projeto\\data");
-    private static final File arq = new File(dir, "filmes.txt");
     private static FilmeDAO instance = null;
+    private static final Object lock = new Object();
 
     private List<Filme> filmes;
-    private int proximoId;
+    private AtomicInteger proximoId;
 
     public FilmeDAO() {
         filmes = new ArrayList<>();
-        proximoId = 1;
-        carregarFilmes();
+        proximoId = new AtomicInteger(1);
+        System.out.println("[FilmeDAO] Inicialização em memória concluída com sucesso");
     }
 
     public List<Filme> carregarFilmes() {
-    	filmes = new ArrayList<>(); 
-//        List<Filme> filmes = new ArrayList<>(); cria uma lista nova local, não a da instância
-
-        if (!dir.exists()) {
-            dir.mkdirs();
+        synchronized (lock) {
+            // Retorna uma cópia da lista para evitar modificações externas
+            return new ArrayList<>(filmes);
         }
-
-        if (!arq.exists()) {
-            try {
-                arq.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(arq))) {
-            String linha;
-            while ((linha = bufferedReader.readLine()) != null) {
-                if (!linha.isEmpty()) {
-                    String[] partes = linha.split("\\|");
-                    if (partes.length == 8) { 
-                        Filme filme = new Filme(
-                            partes[0],
-                            partes[1], 
-                            Integer.parseInt(partes[2]), 
-                            partes[3], 
-                            partes[4], 
-                            partes[5], 
-                            Integer.parseInt(partes[6]), 
-                            partes[7], 
-                            proximoId++ 
-                        );
-                        filmes.add(filme); 
-                        System.out.println("Carregando filmes do arquivo: " + arq.getAbsolutePath());
-
-                    } else {
-                        System.out.println("Linha inválida: " + linha); 
-                    }
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return filmes; 
     }
-
 
     public boolean adicionarFilme(Filme filme) {
-        filme.setId(proximoId++);
-        filmes.add(filme);
-        return salvarFilmes();
+        synchronized (lock) {
+            filme.setId(proximoId.getAndIncrement());
+            filmes.add(filme);
+            System.out.println("[FilmeDAO] Filme adicionado: " + filme.getTitulo() + " (ID: " + filme.getId() + ")");
+            return true;
+        }
     }
 
-    public boolean salvarFilmes() {
-        try (PrintWriter printWriter = new PrintWriter(new FileWriter(arq, false))) {
-            for (Filme filme : filmes) {
-                printWriter.println(filme.getTitulo() + "|" +
-                                   filme.getDiretor() + "|" +
-                                   filme.getAnoLancamento() + "|" +
-                                   filme.getSinopse() + "|" +
-                                   filme.getIdioma() + "|" +
-                                   filme.getFormato() + "|" +
-                                   filme.getDuracao() + "|" +
-                                   filme.getImagem());
+    public boolean removerFilme(int id) {
+        synchronized (lock) {
+            boolean removido = filmes.removeIf(f -> f.getId() == id);
+            if (removido) {
+                System.out.println("[FilmeDAO] Filme removido (ID: " + id + ")");
+                return true;
             }
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("[FilmeDAO] Filme não encontrado para remoção (ID: " + id + ")");
             return false;
         }
     }
 
-    public static FilmeDAO getInstance() {
+    public static synchronized FilmeDAO getInstance() {
         if (instance == null) {
             instance = new FilmeDAO();
         }
@@ -103,41 +54,27 @@ public class FilmeDAO {
     }
     
     public List<Filme> getFilmes() {
-        return filmes;
+        return new ArrayList<>(filmes); // Retorna cópia
     }
-
 
     public Filme buscarPorId(int id) {
-        for (Filme f : filmes) {
-            if (f.getId() == id) return f;
-        }
-        return null;
-    }
-
-    public boolean removerFilme(int id) {
-        for (Filme filme : filmes) {
-            if (filme.getId() == id) {
-                filmes.remove(filme);
-                return true;
-            }
-        }
-        return false; 
+        return filmes.stream()
+            .filter(f -> f.getId() == id)
+            .findFirst()
+            .orElse(null);
     }
 
     public boolean atualizarFilme(Filme filmeAtualizado) {
-        for (Filme f : filmes) {
-            if (f.getId() == filmeAtualizado.getId()) {
-                f.setTitulo(filmeAtualizado.getTitulo());
-                f.setDiretor(filmeAtualizado.getDiretor());
-                f.setSinopse(filmeAtualizado.getSinopse());
-                f.setAnoLancamento(filmeAtualizado.getAnoLancamento());
-                f.setIdioma(filmeAtualizado.getIdioma());
-                f.setFormato(filmeAtualizado.getFormato());
-                f.setDuracao(filmeAtualizado.getDuracao());
-                f.setImagem(filmeAtualizado.getImagem());
-                return true;
+        synchronized (lock) {
+            for (int i = 0; i < filmes.size(); i++) {
+                if (filmes.get(i).getId() == filmeAtualizado.getId()) {
+                    filmes.set(i, filmeAtualizado);
+                    System.out.println("[FilmeDAO] Filme atualizado (ID: " + filmeAtualizado.getId() + ")");
+                    return true;
+                }
             }
+            System.out.println("[FilmeDAO] Filme não encontrado para atualização (ID: " + filmeAtualizado.getId() + ")");
+            return false;
         }
-        return false;
     }
 }

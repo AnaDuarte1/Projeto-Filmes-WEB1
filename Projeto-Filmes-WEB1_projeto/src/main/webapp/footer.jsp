@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-4 mb-4 mb-md-0">
                 <h5 class="text-primary mb-3"><i class="fas fa-film me-2"></i>CineWeb</h5>
-                <p class="text-muted">O melhor catálogo de filmes online para os amantes de cinema.</p>
+                <p class="text-muted">O melhor catalogo de filmes online para os amantes de cinema.</p>
                 <div class="social-icons mt-3">
                     <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
@@ -15,7 +15,7 @@
             <div class="col-md-4 mb-4 mb-md-0">
                 <h5 class="text-primary mb-3">Links Uteis</h5>
                 <ul class="list-unstyled">
-                    <li class="mb-2"><a href="listar-filmes.jsp" class="text-white text-decoration-none">Catalogo de Filmes</a></li>
+                    <li class="mb-2"><a href="listar-filmes" class="text-white text-decoration-none">Catalogo de Filmes</a></li>
                     <li class="mb-2"><a href="sobreSistema.jsp" class="text-white text-decoration-none">Sobre o Sistema</a></li>
                     <li class="mb-2"><a href="cadastrar.jsp" class="text-white text-decoration-none">Adicionar Filme</a></li>
                     <li><a href="login.jsp" class="text-white text-decoration-none">Área do Administrador</a></li>
@@ -49,6 +49,9 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
 <script>
     // Efeito de hover nos links do footer
     $(document).ready(function() {

@@ -13,20 +13,28 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/excluir-filme")
 public class RemoverFilme extends HttpServlet {
-    private FilmeDAO filmeDAO = new FilmeDAO();
+    private final FilmeDAO filmeDAO = FilmeDAO.getInstance(); // Usar Singleton
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        Filme filme = filmeDAO.buscarPorId(id);
-        
-        // Remover a imagem do servidor, se necessário
-        File imagemFile = new File(filme.getImagem());
-        if (imagemFile.exists()) {
-            imagemFile.delete(); // Deletar a imagem do servidor
-        }
+        try {
+            int id = Integer.parseInt(request.getParameter("id"));
+            
+            // Opcional: ainda pode remover a imagem se quiser manter essa funcionalidade
+            Filme filme = filmeDAO.buscarPorId(id);
+            if (filme != null && filme.getImagem() != null) {
+                String uploadPath = getServletContext().getRealPath("");
+                File imagemFile = new File(uploadPath, filme.getImagem());
+                if (imagemFile.exists()) {
+                    imagemFile.delete();
+                }
+            }
 
-        filmeDAO.removerFilme(id);
-        response.sendRedirect("listar-filmes");
+            filmeDAO.removerFilme(id);
+            response.sendRedirect("listar-filmes");
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendRedirect("listar-filmes?error=Erro ao excluir filme");
+        }
     }
 }

@@ -123,7 +123,7 @@
         </div>
     </div>
     
-    <%@ include file="footer.jsp" %>
+
     
     <script>
         // Validação básica do formulário

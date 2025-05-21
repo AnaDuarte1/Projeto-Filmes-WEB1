@@ -84,7 +84,7 @@
                 </div>
                 
                 <div class="text-center">
-                    <p class="mb-1">Não tem uma conta? <a href="cadastrar.jsp">Cadastre-se</a></p>
+                    <p class="mb-1">Não tem uma conta? <a href="cadastrarUsuario.jsp">Cadastre-se</a></p>
                     <p><a href="#">Esqueceu sua senha?</a></p>
                 </div>
             </form>

@@ -49,7 +49,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="home">
+            <a class="navbar-brand" href="home.jsp">
                 <i class="fas fa-film me-2"></i>CineWeb
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,7 +58,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item ${param.activePage == 'filmes' ? 'active' : ''}">
-                        <a class="nav-link" href="listar-filmes.jsp">
+                        <a class="nav-link" href="listar-filmes">
                             <i class="fas fa-list me-1"></i> Catalogo
                         </a>
                     </li>
