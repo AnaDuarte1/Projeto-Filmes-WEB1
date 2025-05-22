@@ -9,7 +9,7 @@
         if (errMessage != null) {
     %>
         <script>
-            alert("<%= errMessage %>"); // Exibe um alert com a mensagem de erro
+            alert("<%= errMessage %>"); 
         </script>
     <%
         }

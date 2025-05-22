@@ -17,7 +17,9 @@ import javax.servlet.http.Part;
 @WebServlet({"/editar-filme", "/atualizar-filme"})
 @MultipartConfig
 public class AtualizarFilme extends HttpServlet {
-    private final FilmeDAO filmeDAO = FilmeDAO.getInstance(); // Usar Singleton
+	
+	private static final long serialVersionUID = 1L;
+    private final FilmeDAO filmeDAO = FilmeDAO.getInstance(); 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -68,9 +70,10 @@ public class AtualizarFilme extends HttpServlet {
                 request.getParameter("sinopse"),
                 request.getParameter("idioma"),
                 request.getParameter("formato"),
+                request.getParameter("categoria"),
                 Integer.parseInt(request.getParameter("duracao")),
                 imagemPath,
-                id // Manter o mesmo ID
+                id 
             );
 
             filmeDAO.atualizarFilme(filmeAtualizado);

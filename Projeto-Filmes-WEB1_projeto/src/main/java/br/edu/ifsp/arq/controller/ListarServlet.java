@@ -13,6 +13,8 @@ import java.util.List;
 
 @WebServlet("/listar-filmes")
 public class ListarServlet extends HttpServlet {
+	
+	private static final long serialVersionUID = 1L;
     private final FilmeDAO filmeDAO;
     
     public ListarServlet() {

@@ -17,13 +17,14 @@ import javax.servlet.http.Part;
 @WebServlet("/criar-filme")
 @MultipartConfig
 public class AdicionarFilme extends HttpServlet {
+	
+	private static final long serialVersionUID = 1L;
     private final FilmeDAO filmeDAO = FilmeDAO.getInstance();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         
         try {
-            // Processar upload de imagem
             Part imagemPart = request.getPart("imagem");
             String imagemPath = null;
             
@@ -33,11 +34,10 @@ public class AdicionarFilme extends HttpServlet {
                 if (!uploadDir.exists()) uploadDir.mkdir();
                 
                 String fileName = Paths.get(imagemPart.getSubmittedFileName()).getFileName().toString();
-                imagemPath = "imagens/" + fileName; // Caminho relativo
+                imagemPath = "imagens/" + fileName; 
                 imagemPart.write(uploadPath + File.separator + fileName);
             }
 
-            // Criar novo filme
             Filme novoFilme = new Filme(
                 request.getParameter("titulo"),
                 request.getParameter("diretor"),
@@ -45,9 +45,10 @@ public class AdicionarFilme extends HttpServlet {
                 request.getParameter("sinopse"),
                 request.getParameter("idioma"),
                 request.getParameter("formato"),
+                request.getParameter("categoria"),
                 Integer.parseInt(request.getParameter("duracao")),
                 imagemPath,
-                0 // ID será gerado pelo DAO
+                0 
             );
 
             filmeDAO.adicionarFilme(novoFilme);
@@ -56,7 +57,7 @@ public class AdicionarFilme extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("error", "Erro ao adicionar filme: " + e.getMessage());
-            request.getRequestDispatcher("/adicionar.jsp").forward(request, response);
+            request.getRequestDispatcher("/cadastrar.jsp").forward(request, response);
         }
     }
 }

@@ -1,3 +1,1 @@
-aa|aaa|2000|aaa|pt|DVD|100|imagens/IFSP-Wallpaper-1920x1080.png|1
-ana|oi|2001|ana|pt|DVD|3000|imagens/IFSP-Wallpaper-1920x1080.png|2
-aaa|aaa|1900|aaa|pt-br|DVD|2000|imagens/IFSP-Wallpaper-1920x1080.png|3
+

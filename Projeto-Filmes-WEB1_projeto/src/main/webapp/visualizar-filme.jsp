@@ -30,6 +30,9 @@
                             <dt class="col-sm-3">Formato:</dt>
                             <dd class="col-sm-9">${filme.formato}</dd>
                             
+                            <dt class="col-sm-3">Categoria:</dt>
+                            <dd class="col-sm-9">${filme.categoria}</dd>
+                            
                             <dt class="col-sm-3">Duração:</dt>
                             <dd class="col-sm-9">${filme.duracao} minutos</dd>
                         </dl>

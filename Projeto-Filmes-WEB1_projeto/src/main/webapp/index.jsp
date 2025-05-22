@@ -1,200 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="header.jsp" %>
+<link rel="stylesheet" href="css/index.css">
 
-<style>
-    :root {
-        --primary-blue: #1a237e;
-        --secondary-blue: #1976d2;
-        --accent-blue: #4fc3f7;
-        --dark-bg: #0d1117;
-        --light-text: #f8f9fa;
-        --dark-text: #212529;
-    }
-    
-    body {
-        background-color: var(--dark-bg);
-        color: var(--light-text);
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    
-    .hero-section {
-        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
-        padding: 4rem 0;
-        border-radius: 0 0 20px 20px;
-        margin-bottom: 3rem;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-    }
-    
-    .hero-title {
-        font-size: 3.5rem;
-        font-weight: 700;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    }
-    
-    .hero-subtitle {
-        font-size: 1.5rem;
-        opacity: 0.9;
-    }
-    
-    .search-box {
-        max-width: 600px;
-        margin: 2rem auto;
-    }
-    
-    .card {
-        margin-bottom: 25px;
-        border: none;
-        border-radius: 12px;
-        overflow: hidden;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        background: linear-gradient(145deg, #1e283c 0%, #162033 100%);
-        box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-    }
-    
-    .card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 15px 25px rgba(0,0,0,0.3);
-    }
-    
-    .card-img-top {
-        height: 300px;
-        object-fit: cover;
-        border-bottom: 3px solid var(--accent-blue);
-    }
-    
-    .card-title {
-        font-weight: 600;
-        color: var(--accent-blue);
-    }
-    
-    .card-text {
-        color: rgba(255,255,255,0.7);
-        font-size: 0.9rem;
-    }
-    
-    .btn-custom {
-        background-color: var(--secondary-blue);
-        color: white;
-        border: none;
-        border-radius: 50px;
-        padding: 8px 20px;
-        font-weight: 500;
-        transition: all 0.3s ease;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
-    
-    .btn-custom:hover {
-        background-color: var(--accent-blue);
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(79, 195, 247, 0.4);
-    }
-    
-    .section-title {
-        position: relative;
-        margin-bottom: 2rem;
-        font-weight: 700;
-        color: var(--accent-blue);
-    }
-    
-    .section-title:after {
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: -10px;
-        width: 50px;
-        height: 3px;
-        background: var(--accent-blue);
-    }
-    
-    .carousel {
-        border-radius: 15px;
-        overflow: hidden;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-        margin-bottom: 3rem;
-    }
-    
-    .carousel-item {
-        height: 500px;
-    }
-    
-    .carousel-item img {
-        height: 100%;
-        object-fit: cover;
-        filter: brightness(0.7);
-    }
-    
-    .carousel-caption {
-        bottom: 30%;
-        text-align: left;
-        left: 10%;
-        right: 10%;
-    }
-    
-    .carousel-caption h5 {
-        font-size: 2.5rem;
-        font-weight: 700;
-        text-shadow: 2px 2px 5px rgba(0,0,0,0.8);
-    }
-    
-    .carousel-caption p {
-        font-size: 1.1rem;
-        max-width: 600px;
-    }
-    
-    .carousel-control-prev, .carousel-control-next {
-        width: 5%;
-    }
-    
-    .category-badge {
-        display: inline-block;
-        background-color: rgba(79, 195, 247, 0.2);
-        color: var(--accent-blue);
-        padding: 5px 15px;
-        border-radius: 50px;
-        margin: 5px;
-        transition: all 0.3s ease;
-        cursor: pointer;
-    }
-    
-    .category-badge:hover {
-        background-color: var(--accent-blue);
-        color: var(--dark-text);
-        transform: scale(1.05);
-    }
-    
-    footer {
-        background: linear-gradient(135deg, var(--primary-blue) 0%, #0d1117 100%);
-        padding: 2rem 0;
-        margin-top: 3rem;
-    }
-    
-    .no-image-placeholder {
-        width: 100%;
-        height: 300px;
-        background: #1e283c;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--accent-blue);
-        font-size: 2rem;
-    }
-    
-    .text-truncate-2 {
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-    
-    .estreias-section .card-img-top {
-        height: 350px;
-    }
-</style>
 
-<!-- Hero Section -->
 <section class="hero-section text-center">
     <div class="container">
         <h1 class="hero-title">CineBlue</h1>
@@ -213,7 +22,6 @@
     </div>
 </section>
 
-<!-- Main Content -->
 <div class="container">
     <!-- Carrossel de Destaques -->
     <h2 class="section-title">Em Destaque</h2>
@@ -221,21 +29,48 @@
         <div class="carousel-inner">
             <!-- Filme 1 estático -->
             <div class="carousel-item active">
-                <img src="https://via.placeholder.com/800x400?text=Homem+com+H" class="d-block w-100" alt="Homem com H">
+                <img src="imagens/filmes-destaques/gato-de-botas.png" class="d-block w-100" alt="Gato de Botas 2: O Último Pedido">
                 <div class="carousel-caption">
-                    <h5>Homem com H</h5>
-                    <p>As diferentes fases da carreira do cantor Ney Matogrosso, desde a sua infância, passando pela adolescência e a vida adulta.</p>
-                    <a href="#" class="btn btn-custom">Assistir Agora</a>
+                    <h5>Gato de Botas 2: O Último Pedido</h5>
+                    <p>O Gato de Botas descobre que sua paixão pela aventura cobrou seu preço: ele já gastou oito de suas nove vidas. Ele então parte em uma jornada épica para encontrar o mítico Último Desejo e restaurar suas nove vidas.</p>
+                    <a href="https://www.netflix.com/br/title/81555726?source=35" class="btn btn-custom">Assistir Agora</a>
                 </div>
             </div>
             
             <!-- Filme 2 estático -->
             <div class="carousel-item">
-                <img src="https://via.placeholder.com/800x400?text=Aventura+no+Espaço" class="d-block w-100" alt="Aventura no Espaço">
+                <img src="imagens/filmes-destaques/Baila-Vini.png" class="d-block w-100" alt="Baila, Vini">
                 <div class="carousel-caption">
-                    <h5>Aventura no Espaço</h5>
-                    <p>Uma jornada épica através das galáxias em busca do planeta perdido.</p>
-                    <a href="#" class="btn btn-custom">Assistir Agora</a>
+                    <h5>Baila, Vini</h5>
+                    <p>Em Baila, Vini, somos levados aos bastidores da vida do jogador de futebol do Real Madrid e da Seleção Brasileira 
+                    Vinícius Júnior, que se tornou um dos esportistas mais conhecidos e bem-sucedidos do mundo. 
+                    O documentário mostra todas as dificuldades pelas quais o atleta precisou passar ao longo dos anos, mas também as 
+                    suas vitórias e conquistas.</p>
+                    <a href="https://www.netflix.com/br/title/81667943" class="btn btn-custom">Assistir Agora</a>
+                </div>
+            </div>
+            
+            <!-- Filme 3 estático -->
+            <div class="carousel-item">
+                <img src="imagens/filmes-destaques/ad-vitam.jpg" class="d-block w-100" alt="Ad Vitam">
+                <div class="carousel-caption">
+                    <h5>Ad Vitam</h5>
+                    <p>Após sobreviver a uma tentativa de assassinato, Franck Lazareff embarca em uma busca desesperada por sua esposa, Léo, 
+                    que foi sequestrada por um grupo enigmático de homens armados. </p>
+                    <a href="www.netflix.com/search?q=Ad%20Vitam%20&jbv=81752951" class="btn btn-custom">Assistir Agora</a>
+                </div>
+            </div>
+            
+            <!-- Filme 4 estático -->
+            <div class="carousel-item">
+                <img src="imagens/filmes-destaques/contra-ataque.jpg" class="d-block w-100" alt="Contra-ataque">
+                <div class="carousel-caption">
+                    <h5>Contra-ataque </h5>
+                    <p>O longa acompanha o Capitão Armando Guerrero, das Forças Especiais do Exército Mexicano, que resgata duas mulheres das 
+                    mãos do temido Josefo "O Ferrão" Urías, líder dos assassinos de aluguel do cartel de Tamaulipas. 
+                    Ao enfrentar esse poderoso inimigo, Armando e sua equipe são obrigados a tirar alguns dias de descanso antes de sua próxima missão. 
+                    No entanto, a trégua dura pouco. </p>
+                    <a href="https://www.netflix.com/br/title/81936018" class="btn btn-custom">Assistir Agora</a>
                 </div>
             </div>
             

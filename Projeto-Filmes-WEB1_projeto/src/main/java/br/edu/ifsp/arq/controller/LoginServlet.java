@@ -10,6 +10,7 @@ import java.io.IOException;
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
     private UsuarioDAO usuarioDAO;
 
     @Override
@@ -25,7 +26,7 @@ public class LoginServlet extends HttpServlet {
         if (usuarioDAO.autenticar(email, senha)) {
             HttpSession session = request.getSession();
             session.setAttribute("usuarioLogado", email);
-            response.sendRedirect("home.jsp");  
+            response.sendRedirect("index.jsp");  
         } else {
             request.setAttribute("errMessage", "Email ou senha inválidos!"); 
             request.getRequestDispatcher("login.jsp").forward(request, response);

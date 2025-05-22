@@ -5,7 +5,6 @@
 <div class="container mt-4">
     <h2 class="mb-4">${tituloPagina}</h2>
     
-    <%-- Mensagens de feedback --%>
     <c:if test="${not empty errorMessage}">
         <div class="alert alert-danger">${errorMessage}</div>
     </c:if>
@@ -13,12 +12,10 @@
         <div class="alert alert-success">${successMessage}</div>
     </c:if>
     
-    <%-- Botão para adicionar novo filme --%>
     <a href="cadastrar.jsp" class="btn btn-primary mb-3">
         <i class="fas fa-plus"></i> Adicionar Novo Filme
     </a>
     
-    <%-- Tabela de filmes --%>
     <div class="table-responsive">
         <c:choose>
             <c:when test="${empty filmes}">
@@ -30,6 +27,7 @@
                         <tr>
                             <th>Poster</th>
                             <th>Título</th>
+                            <th>Categoria</th>
                             <th>Diretor</th>
                             <th>Ano</th>
                             <th>Duração</th>
@@ -55,6 +53,7 @@
                                     </c:choose>
                                 </td>
                                 <td>${filme.titulo}</td>
+                                <td>${filme.categoria}</td>
                                 <td>${filme.diretor}</td>
                                 <td>${filme.anoLancamento}</td>
                                 <td>${filme.duracao} min</td>
