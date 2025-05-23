@@ -146,8 +146,7 @@
     .carousel-control-prev, .carousel-control-next {
         width: 5%;
     }
-    
-    .category-badge {
+  .category-badge {
         display: inline-block;
         background-color: rgba(79, 195, 247, 0.2);
         color: var(--accent-blue);
@@ -163,6 +162,21 @@
         color: var(--dark-text);
         transform: scale(1.05);
     }
+    
+    .pagination .page-item .btn-custom {
+    background-color: var(--secondary-blue);
+    color: white;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+	}
+	
+	
+	.pagination .page-item .btn-custom:hover:not(.disabled) {
+	    background-color: var(--accent-blue);
+	    box-shadow: 0 6px 15px rgba(79, 195, 247, 0.3);
+	    transform: translateY(-2px);
+	}
+	    
     
     footer {
         background: linear-gradient(135deg, var(--primary-blue) 0%, #0d1117 100%);
@@ -197,7 +211,8 @@
 <!-- Hero Section -->
 <section class="hero-section text-center">
     <div class="container">
-        <h1 class="hero-title">CineBlue</h1>
+        <i class="fas fa-film me-2"></i>
+        <h1 class="hero-title">CineWeb</h1>
         <p class="hero-subtitle">Descubra os melhores filmes em nossa coleção exclusiva</p>
         
         <div class="search-box">
@@ -221,20 +236,20 @@
         <div class="carousel-inner">
             <!-- Filme 1 estático -->
             <div class="carousel-item active">
-                <img src="https://via.placeholder.com/800x400?text=Homem+com+H" class="d-block w-100" alt="Homem com H">
+                <img src="imagem/missaoImpossivel.jpeg" class="d-block w-100" alt="Homem com H">
                 <div class="carousel-caption">
-                    <h5>Homem com H</h5>
-                    <p>As diferentes fases da carreira do cantor Ney Matogrosso, desde a sua infância, passando pela adolescência e a vida adulta.</p>
+                    <h5>Missão Impossível – O Acerto Final </h5>
+                    <p>Ethan Hunt e seus amigos encaram mais um desafio internacional e o agente aprende que a vida é a soma de nossas escolhas..</p>
                     <a href="#" class="btn btn-custom">Assistir Agora</a>
                 </div>
             </div>
             
             <!-- Filme 2 estático -->
             <div class="carousel-item">
-                <img src="https://via.placeholder.com/800x400?text=Aventura+no+Espaço" class="d-block w-100" alt="Aventura no Espaço">
+                <img src="imagem/premonicao.jpg" class="d-block w-100" alt="Premonição">
                 <div class="carousel-caption">
-                    <h5>Aventura no Espaço</h5>
-                    <p>Uma jornada épica através das galáxias em busca do planeta perdido.</p>
+                    <h5>Premonição</h5>
+                    <p>A estudante universitária Stefanie é atormentada por um pesadelo recorrente. Ela decide voltar para casa e rastrear a única pessoa que, talvez, possa ser capaz de quebrar o ciclo fatal anunciado e salvar sua família de um destino terrível..</p>
                     <a href="#" class="btn btn-custom">Assistir Agora</a>
                 </div>
             </div>
@@ -286,18 +301,17 @@
 
 <!-- Nossa Coleção -->
 <h2 class="section-title">Nossa Coleção</h2>
-<div class="row" id="colecao-filmes">
-    <!-- Aqui ficam os cards dos filmes (estáticos e dinâmicos) -->
-    <!-- Importante: adicionar atributo data-categoria nos cards estáticos também -->
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3" id="colecao-filmes">
+    <!-- Cards Estáticos -->
     
     <!-- Filme estático 1 -->
-    <div class="col-md-4 mb-4 filme-card" data-categoria="Documentário">
+    <div class="col mb-4 filme-card" data-categoria="Aventura">
         <div class="card h-100">
-            <img src="https://via.placeholder.com/300x450?text=Homem+com+H" class="card-img-top" alt="Homem com H">
+            <img src="imagem/missaoImpossivel.jpeg" class="card-img-top" alt="Homem com H">
             <div class="card-body d-flex flex-column">
-                <h5 class="card-title">Homem com H</h5>
-                <p class="card-text"><small class="text-muted">João Jardim • 2023</small></p>
-                <p class="card-text text-truncate-2">As diferentes fases da carreira do cantor Ney Matogrosso, desde a sua infância, passando pela adolescência e a vida adulta.</p>
+                <h5 class="card-title">Missão Impossível: O Acerto Final</h5>
+                <p class="card-text"><small class="text-muted">Tom Cruise • 2025</small></p>
+                <p class="card-text text-truncate-2">Ethan Hunt e seus amigos encaram mais um desafio internacional e o agente aprende que a vida é a soma de nossas escolhas...</p>
                 <div class="mt-auto d-flex justify-content-between align-items-center">
                     <span class="badge bg-secondary">Digital</span>
                     <a href="#" class="btn btn-sm btn-custom">Detalhes</a>
@@ -305,15 +319,15 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Filme estático 2 -->
-    <div class="col-md-4 mb-4 filme-card" data-categoria="Aventura">
+    <div class="col mb-4 filme-card" data-categoria="Aventura">
         <div class="card h-100">
-            <img src="https://via.placeholder.com/300x450?text=Aventura+no+Espaço" class="card-img-top" alt="Aventura no Espaço">
+            <img src="imagem/premonicao.jpg" class="card-img-top" alt="Premonição">
             <div class="card-body d-flex flex-column">
-                <h5 class="card-title">Aventura no Espaço</h5>
-                <p class="card-text"><small class="text-muted">Carlos Saldanha • 2022</small></p>
-                <p class="card-text text-truncate-2">Uma jornada épica através das galáxias em busca do planeta perdido.</p>
+                <h5 class="card-title">Premonição</h5>
+                <p class="card-text"><small class="text-muted">Tony Todd • 2025</small></p>
+                <p class="card-text text-truncate-2">A estudante universitária Stefanie é atormentada por um pesadelo recorrente.</p>
                 <div class="mt-auto d-flex justify-content-between align-items-center">
                     <span class="badge bg-secondary">Blu-ray</span>
                     <a href="#" class="btn btn-sm btn-custom">Detalhes</a>
@@ -321,27 +335,11 @@
             </div>
         </div>
     </div>
-    
-    <!-- Filme estático 3 -->
-    <div class="col-md-4 mb-4 filme-card" data-categoria="Aventura">
-        <div class="card h-100">
-            <img src="https://via.placeholder.com/300x450?text=O+Mistério+da+Floresta" class="card-img-top" alt="O Mistério da Floresta">
-            <div class="card-body d-flex flex-column">
-                <h5 class="card-title">O Mistério da Floresta</h5>
-                <p class="card-text"><small class="text-muted">Ana Maria • 2021</small></p>
-                <p class="card-text text-truncate-2">Um grupo de exploradores descobre segredos antigos em uma floresta proibida.</p>
-                <div class="mt-auto d-flex justify-content-between align-items-center">
-                    <span class="badge bg-secondary">DVD</span>
-                    <a href="#" class="btn btn-sm btn-custom">Detalhes</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Filmes cadastrados pelo admin -->
+
+    <!-- Filmes Dinâmicos (JSTL) -->
     <c:forEach items="${filmes}" var="filme">
-        <div class="col-md-4 mb-4 filme-card" data-categoria="${filme.categoria}">
-            <div class="card h-100" >
+        <div class="col mb-4 filme-card" data-categoria="${filme.categoria}">
+            <div class="card h-100">
                 <c:choose>
                     <c:when test="${not empty filme.imagem}">
                         <img src="${pageContext.request.contextPath}/${filme.imagem}" class="card-img-top" alt="${filme.titulo}">
@@ -356,7 +354,7 @@
                     <h5 class="card-title">${filme.titulo}</h5>
                     <p class="card-text"><small class="text-muted">${filme.diretor} • ${filme.anoLancamento}</small></p>
                     <p class="card-text text-truncate-2">${filme.sinopse}</p>
-                    <div class="mt-auto d-flex justify-content-between align-items-center">
+                    <div class="mt-auto d-flex justify-content-between align-items-center flex-wrap gap-1">
                         <span class="badge bg-secondary">${filme.formato}</span>
                         <span class="badge bg-secondary">${filme.categoria}</span>
                         <a href="visualizar-filme?id=${filme.id}" class="btn btn-sm btn-custom">Detalhes</a>
@@ -367,6 +365,7 @@
     </c:forEach>
 </div>
 
+<!-- Paginação -->
 <nav aria-label="Paginação filmes">
     <ul class="pagination justify-content-center" id="pagination">
         <!-- Paginação será gerada pelo JavaScript -->
@@ -437,7 +436,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const colecaoFilmes = document.getElementById('colecao-filmes');
     const pagination = document.getElementById('pagination');
     
-    const itensPorPagina = 6;  // Ajuste a quantidade de filmes por página
+    const itensPorPagina = 3; 
     let paginaAtual = 1;
     let filmesFiltrados = filmes;
     
@@ -445,62 +444,74 @@ document.addEventListener('DOMContentLoaded', function () {
         const inicio = (pagina - 1) * itensPorPagina;
         const fim = inicio + itensPorPagina;
         
-        filmes.forEach(filme => filme.style.display = 'none'); // Oculta todos
+        filmes.forEach(filme => filme.style.display = 'none'); 
         
         filmesFiltrados.slice(inicio, fim).forEach(filme => {
-            filme.style.display = 'block'; // Mostra apenas os filmes da página atual
+            filme.style.display = 'block'; 
         });
     }
     
     function criarPaginacao() {
         pagination.innerHTML = '';
         const totalPaginas = Math.ceil(filmesFiltrados.length / itensPorPagina);
-        
-        // Botão anterior
-        const prevLi = document.createElement('li');
-        prevLi.classList.add('page-item');
-        if (paginaAtual === 1) prevLi.classList.add('disabled');
-        prevLi.innerHTML = `<a class="page-link" href="#" aria-label="Anterior"><span aria-hidden="true">&laquo;</span></a>`;
-        prevLi.addEventListener('click', function(e) {
-            e.preventDefault();
-            if(paginaAtual > 1){
-                paginaAtual--;
-                mostrarFilmes(paginaAtual);
-                criarPaginacao();
-            }
-        });
-        pagination.appendChild(prevLi);
-        
-        // Páginas numeradas
-        for(let i = 1; i <= totalPaginas; i++) {
+
+        // Função para criar um botão de paginação estilizado
+        function criarBotao(texto, ativo, desativado, callback) {
             const li = document.createElement('li');
             li.classList.add('page-item');
-            if(i === paginaAtual) li.classList.add('active');
-            li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
-            li.addEventListener('click', function(e) {
-                e.preventDefault();
+            if (ativo) li.classList.add('active');
+            if (desativado) li.classList.add('disabled');
+
+            const a = document.createElement('a');
+            a.classList.add('page-link', 'btn-custom');
+            a.style.borderRadius = '30px';
+            a.style.margin = '0 5px';
+            a.style.padding = '6px 16px';
+            a.href = '#';
+            a.textContent = texto;
+
+            if (!desativado) {
+                a.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    callback();
+                });
+            }
+
+            li.appendChild(a);
+            return li;
+        }
+
+        // Botão anterior
+        pagination.appendChild(criarBotao('«', false, paginaAtual === 1, () => {
+            paginaAtual--;
+            mostrarFilmes(paginaAtual);
+            criarPaginacao();
+        }));
+
+        // Páginas numeradas (ex: mostra até 5 páginas vizinhas)
+        let maxPaginas = 5;
+        let inicio = Math.max(1, paginaAtual - Math.floor(maxPaginas / 2));
+        let fim = Math.min(totalPaginas, inicio + maxPaginas - 1);
+        if (fim - inicio < maxPaginas - 1) {
+            inicio = Math.max(1, fim - maxPaginas + 1);
+        }
+
+        for (let i = inicio; i <= fim; i++) {
+            pagination.appendChild(criarBotao(i, i === paginaAtual, false, () => {
                 paginaAtual = i;
                 mostrarFilmes(paginaAtual);
                 criarPaginacao();
-            });
-            pagination.appendChild(li);
+            }));
         }
-        
+
         // Botão próximo
-        const nextLi = document.createElement('li');
-        nextLi.classList.add('page-item');
-        if (paginaAtual === totalPaginas) nextLi.classList.add('disabled');
-        nextLi.innerHTML = `<a class="page-link" href="#" aria-label="Próximo"><span aria-hidden="true">&raquo;</span></a>`;
-        nextLi.addEventListener('click', function(e) {
-            e.preventDefault();
-            if(paginaAtual < totalPaginas){
-                paginaAtual++;
-                mostrarFilmes(paginaAtual);
-                criarPaginacao();
-            }
-        });
-        pagination.appendChild(nextLi);
+        pagination.appendChild(criarBotao('»', false, paginaAtual === totalPaginas, () => {
+            paginaAtual++;
+            mostrarFilmes(paginaAtual);
+            criarPaginacao();
+        }));
     }
+
     
     function filtrarFilmes(categoria) {
         if(categoria === 'Todos') {
@@ -516,12 +527,12 @@ document.addEventListener('DOMContentLoaded', function () {
     // Evento para clicar nas categorias
     categorias.forEach(cat => {
         cat.addEventListener('click', () => {
-            // Remove a classe active das outras
+           
             categorias.forEach(c => {
                 c.classList.remove('bg-primary', 'text-white');
                 c.classList.add('bg-secondary');
             });
-            // Adiciona active na clicada
+            
             cat.classList.remove('bg-secondary');
             cat.classList.add('bg-primary', 'text-white');
             
@@ -529,7 +540,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
     
-    // Inicialização: mostra todos e primeira página
+    
     filtrarFilmes('Todos');
 });
 </script>

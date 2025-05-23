@@ -16,9 +16,9 @@ public class FilmeDAO {
         proximoId = new AtomicInteger(1);
         
         // Dados iniciais para teste
-        filmes.add(new Filme("Homem com H", "João Jardim", 2023, 
-                "Documentário sobre Ney Matogrosso", "Português", 
-                "Digital", "Documentário", 120, null, proximoId.getAndIncrement()));
+        filmes.add(new Filme("ThunderBolts", "Marvel", 2025, 
+                "Em Thunderbolts, Yelena faz parte de uma equipe composta por ex-supervilões redimidos, prontos para agir em nome de causas controversas.", "Português", 
+                "Digital", "Ação", 120, "imagem/thunderbolts.webp", proximoId.getAndIncrement()));
         
         System.out.println("[FilmeDAO] Inicializado com " + filmes.size() + " filmes");
     }
