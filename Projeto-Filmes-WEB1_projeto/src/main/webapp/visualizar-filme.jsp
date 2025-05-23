@@ -32,6 +32,10 @@
                             
                             <dt class="col-sm-3">Duração:</dt>
                             <dd class="col-sm-9">${filme.duracao} minutos</dd>
+                            
+                            
+                            <dt class="col-sm-3">Categoria:</dt>
+                            <dd class="col-sm-9">${filme.categoria}</dd>
                         </dl>
                         
                         <h4>Sinopse</h4>

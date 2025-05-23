@@ -17,10 +17,12 @@ import javax.servlet.http.Part;
 @WebServlet("/criar-filme")
 @MultipartConfig
 public class AdicionarFilme extends HttpServlet {
-    private final FilmeDAO filmeDAO = FilmeDAO.getInstance();
+    private static final long serialVersionUID = 1L;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
+        
+        FilmeDAO filmeDAO = FilmeDAO.getInstance();
         
         try {
             // Processar upload de imagem
@@ -33,7 +35,7 @@ public class AdicionarFilme extends HttpServlet {
                 if (!uploadDir.exists()) uploadDir.mkdir();
                 
                 String fileName = Paths.get(imagemPart.getSubmittedFileName()).getFileName().toString();
-                imagemPath = "imagens/" + fileName; // Caminho relativo
+                imagemPath = "imagens/" + fileName;
                 imagemPart.write(uploadPath + File.separator + fileName);
             }
 
@@ -45,13 +47,18 @@ public class AdicionarFilme extends HttpServlet {
                 request.getParameter("sinopse"),
                 request.getParameter("idioma"),
                 request.getParameter("formato"),
+                request.getParameter("categoria"),
                 Integer.parseInt(request.getParameter("duracao")),
                 imagemPath,
                 0 // ID será gerado pelo DAO
             );
 
             filmeDAO.adicionarFilme(novoFilme);
-            response.sendRedirect("listar-filmes");
+            
+            // Log de confirmação
+            System.out.println("Filme cadastrado com sucesso: " + novoFilme.getTitulo());
+            
+            response.sendRedirect("home");
             
         } catch (Exception e) {
             e.printStackTrace();

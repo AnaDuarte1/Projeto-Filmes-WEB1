@@ -13,6 +13,8 @@ import java.util.List;
 
 @WebServlet("/listar-filmes")
 public class ListarServlet extends HttpServlet {
+	
+	private static final long serialVersionUID = 1L;
     private final FilmeDAO filmeDAO;
     
     public ListarServlet() {
@@ -30,6 +32,7 @@ public class ListarServlet extends HttpServlet {
             request.setAttribute("tituloPagina", "Lista de Filmes");
             
             request.getRequestDispatcher("/listar-filmes.jsp").forward(request, response);
+           // request.getRequestDispatcher("/home.jsp").forward(request, response);
             
         } catch (Exception e) {
             System.err.println("[ERRO] ListarServlet: " + e.getMessage());

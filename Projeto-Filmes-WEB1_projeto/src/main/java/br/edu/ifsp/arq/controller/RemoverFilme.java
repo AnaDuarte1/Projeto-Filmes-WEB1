@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/excluir-filme")
 public class RemoverFilme extends HttpServlet {
+	private static final long serialVersionUID = 1L;
     private final FilmeDAO filmeDAO = FilmeDAO.getInstance(); // Usar Singleton
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

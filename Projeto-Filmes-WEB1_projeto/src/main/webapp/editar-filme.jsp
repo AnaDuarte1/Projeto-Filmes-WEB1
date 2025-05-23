@@ -4,7 +4,7 @@
 <%@ page import="br.edu.ifsp.arq.dao.FilmeDAO" %>
 
 <%
-    FilmeDAO filmeDAO = new FilmeDAO();
+    FilmeDAO filmeDAO = FilmeDAO.getInstance();
     int id = Integer.parseInt(request.getParameter("id"));
     Filme filme = filmeDAO.buscarPorId(id);
 %>
@@ -61,6 +61,21 @@
                         </select>
                     </div>
                 </div>
+                
+                 <div class="mb-3">
+                    <label for="categoria" class="form-label">Categoria *</label>
+                    <select class="form-select" id="categoria" name="categoria" required>
+                        <option value="Acao" ${filme.categoria == 'Ação' ? 'selected' : ''}>Ação</option>
+                        <option value="Aventura" ${filme.categoria == 'Aventura' ? 'selected' : ''}>Aventura</option>
+                        <option value="Drama" ${filme.categoria == 'Drama' ? 'selected' : ''}>Drama</option>
+                        <option value="Comedia" ${filme.categoria == 'Comédia' ? 'selected' : ''}>Comédia</option>
+                        <option value="Ficcao Cientifica" ${filme.categoria == 'Ficção Científica' ? 'selected' : ''}>Ficção Científica</option>
+                        <option value="Terror" ${filme.categoria == 'Terror' ? 'selected' : ''}>Terror</option>
+                        <option value="Romance" ${filme.categoria == 'Romance' ? 'selected' : ''}>Romance</option>
+                        <option value="Documentario" ${filme.categoria == 'Documentário' ? 'selected' : ''}>Documentário</option>
+                    </select>
+                </div>
+                
                 
                 <div class="mb-3">
                     <label for="idioma" class="form-label">Idioma *</label>

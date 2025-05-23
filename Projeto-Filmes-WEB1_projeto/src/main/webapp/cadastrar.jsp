@@ -8,25 +8,9 @@
 </c:if>
 <%@ include file="header.jsp" %>
 
-    <style>
-        body {
-            padding: 20px;
-            background-color: #f8f9fa;
-        }
-        .form-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .form-title {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #0d6efd;
-        }
-    </style>
+<%@ include file="styles/cadastrar.jsp" %>
+
+  
 </head>
 <body>
     <div class="container">
@@ -75,6 +59,21 @@
                         <option value="Blu-ray">Blu-ray</option>
                         <option value="Digital">Digital</option>
                         <option value="Outro">Outro</option>
+                    </select>
+                </div>
+                
+                 <div class="mb-3">
+                    <label for="categoria" class="form-label">Categoria</label>
+                    <select class="form-select" id="categoria" name="categoria" required>
+                        <option value="" selected disabled>Selecione...</option>
+                        <option value="Acao">Ação</option>
+                        <option value="Aventura">Aventura</option>
+                        <option value="Drama">Drama</option>
+                        <option value="Comedia">Comédia</option>
+                        <option value="Ficcao Cientifica">Ficção Científica</option>
+                        <option value="Terror">Terror</option>
+                        <option value="Romance">Romance</option>
+                        <option value="Documentario">Documentário</option>
                     </select>
                 </div>
                 

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="header.jsp" %>
-
+<%@ include file="styles/cadastrarUsuario.jsp" %>
 <div class="container mt-5">
     <h1 class="text-center">Cadastro</h1>
 

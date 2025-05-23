@@ -7,54 +7,48 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class FilmeDAO {
     private static FilmeDAO instance = null;
-    private static final Object lock = new Object();
-
     private List<Filme> filmes;
     private AtomicInteger proximoId;
 
-    public FilmeDAO() {
+    // Construtor privado
+    private FilmeDAO() {
         filmes = new ArrayList<>();
         proximoId = new AtomicInteger(1);
-        System.out.println("[FilmeDAO] Inicialização em memória concluída com sucesso");
+        
+        // Dados iniciais para teste
+        filmes.add(new Filme("Homem com H", "João Jardim", 2023, 
+                "Documentário sobre Ney Matogrosso", "Português", 
+                "Digital", "Documentário", 120, null, proximoId.getAndIncrement()));
+        
+        System.out.println("[FilmeDAO] Inicializado com " + filmes.size() + " filmes");
     }
 
-    public List<Filme> carregarFilmes() {
-        synchronized (lock) {
-            // Retorna uma cópia da lista para evitar modificações externas
-            return new ArrayList<>(filmes);
-        }
-    }
-
-    public boolean adicionarFilme(Filme filme) {
-        synchronized (lock) {
-            filme.setId(proximoId.getAndIncrement());
-            filmes.add(filme);
-            System.out.println("[FilmeDAO] Filme adicionado: " + filme.getTitulo() + " (ID: " + filme.getId() + ")");
-            return true;
-        }
-    }
-
-    public boolean removerFilme(int id) {
-        synchronized (lock) {
-            boolean removido = filmes.removeIf(f -> f.getId() == id);
-            if (removido) {
-                System.out.println("[FilmeDAO] Filme removido (ID: " + id + ")");
-                return true;
-            }
-            System.out.println("[FilmeDAO] Filme não encontrado para remoção (ID: " + id + ")");
-            return false;
-        }
-    }
-
+    // Método sincronizado para obter instância
     public static synchronized FilmeDAO getInstance() {
         if (instance == null) {
             instance = new FilmeDAO();
         }
         return instance;
     }
-    
+
     public List<Filme> getFilmes() {
+        System.out.println("[FilmeDAO] Retornando " + filmes.size() + " filmes");
         return new ArrayList<>(filmes); // Retorna cópia
+    }
+
+    public boolean adicionarFilme(Filme filme) {
+        filme.setId(proximoId.getAndIncrement());
+        filmes.add(filme);
+        System.out.println("[FilmeDAO] Filme adicionado: " + filme.getTitulo() + 
+                         " (Total: " + filmes.size() + ")");
+        return true;
+    }
+
+    public boolean removerFilme(int id) {
+        boolean removido = filmes.removeIf(f -> f.getId() == id);
+        System.out.println("[FilmeDAO] Tentativa de remover ID " + id + 
+                         (removido ? " - Sucesso" : " - Falha"));
+        return removido;
     }
 
     public Filme buscarPorId(int id) {
@@ -65,16 +59,15 @@ public class FilmeDAO {
     }
 
     public boolean atualizarFilme(Filme filmeAtualizado) {
-        synchronized (lock) {
-            for (int i = 0; i < filmes.size(); i++) {
-                if (filmes.get(i).getId() == filmeAtualizado.getId()) {
-                    filmes.set(i, filmeAtualizado);
-                    System.out.println("[FilmeDAO] Filme atualizado (ID: " + filmeAtualizado.getId() + ")");
-                    return true;
-                }
+        for (int i = 0; i < filmes.size(); i++) {
+            if (filmes.get(i).getId() == filmeAtualizado.getId()) {
+                filmes.set(i, filmeAtualizado);
+                System.out.println("[FilmeDAO] Filme atualizado: ID " + filmeAtualizado.getId());
+                return true;
             }
-            System.out.println("[FilmeDAO] Filme não encontrado para atualização (ID: " + filmeAtualizado.getId() + ")");
-            return false;
         }
+        System.out.println("[FilmeDAO] Filme não encontrado para atualização: ID " + 
+                         filmeAtualizado.getId());
+        return false;
     }
 }

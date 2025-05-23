@@ -255,6 +255,7 @@
                     <div class="carousel-caption">
                         <h5>${filme.titulo}</h5>
                         <p>${filme.sinopse}</p>
+                        <p>${filme.categoria}</p>
                         <a href="visualizar-filme?id=${filme.id}" class="btn btn-custom">Assistir Agora</a>
                     </div>
                 </div>
@@ -269,99 +270,110 @@
             <span class="sr-only">Próximo</span>
         </a>
     </div>
+   <!-- Categorias -->
+<h2 class="section-title">Categorias</h2>
+<div class="text-center mb-5">
+    <span class="category-badge badge bg-primary text-white" data-categoria="Todos" style="cursor:pointer;">Todos</span>
+    <span class="category-badge badge bg-secondary" data-categoria="Ação" style="cursor:pointer;">Ação</span>
+    <span class="category-badge badge bg-secondary" data-categoria="Aventura" style="cursor:pointer;">Aventura</span>
+    <span class="category-badge badge bg-secondary" data-categoria="Drama" style="cursor:pointer;">Drama</span>
+    <span class="category-badge badge bg-secondary" data-categoria="Comédia" style="cursor:pointer;">Comédia</span>
+    <span class="category-badge badge bg-secondary" data-categoria="Ficção Científica" style="cursor:pointer;">Ficção Científica</span>
+    <span class="category-badge badge bg-secondary" data-categoria="Terror" style="cursor:pointer;">Terror</span>
+    <span class="category-badge badge bg-secondary" data-categoria="Romance" style="cursor:pointer;">Romance</span>
+    <span class="category-badge badge bg-secondary" data-categoria="Documentário" style="cursor:pointer;">Documentário</span>
+</div>
+
+<!-- Nossa Coleção -->
+<h2 class="section-title">Nossa Coleção</h2>
+<div class="row" id="colecao-filmes">
+    <!-- Aqui ficam os cards dos filmes (estáticos e dinâmicos) -->
+    <!-- Importante: adicionar atributo data-categoria nos cards estáticos também -->
     
-    <!-- Categorias -->
-    <h2 class="section-title">Categorias</h2>
-    <div class="text-center mb-5">
-        <span class="category-badge">Ação</span>
-        <span class="category-badge">Aventura</span>
-        <span class="category-badge">Drama</span>
-        <span class="category-badge">Comédia</span>
-        <span class="category-badge">Ficção Científica</span>
-        <span class="category-badge">Terror</span>
-        <span class="category-badge">Romance</span>
-        <span class="category-badge">Documentário</span>
+    <!-- Filme estático 1 -->
+    <div class="col-md-4 mb-4 filme-card" data-categoria="Documentário">
+        <div class="card h-100">
+            <img src="https://via.placeholder.com/300x450?text=Homem+com+H" class="card-img-top" alt="Homem com H">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Homem com H</h5>
+                <p class="card-text"><small class="text-muted">João Jardim • 2023</small></p>
+                <p class="card-text text-truncate-2">As diferentes fases da carreira do cantor Ney Matogrosso, desde a sua infância, passando pela adolescência e a vida adulta.</p>
+                <div class="mt-auto d-flex justify-content-between align-items-center">
+                    <span class="badge bg-secondary">Digital</span>
+                    <a href="#" class="btn btn-sm btn-custom">Detalhes</a>
+                </div>
+            </div>
+        </div>
     </div>
     
-    <!-- Nossa Coleção - Filmes estáticos + dinâmicos -->
-    <h2 class="section-title">Nossa Coleção</h2>
-    <div class="row">
-        <!-- Filme estático 1 -->
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
-                <img src="https://via.placeholder.com/300x450?text=Homem+com+H" class="card-img-top" alt="Homem com H">
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">Homem com H</h5>
-                    <p class="card-text"><small class="text-muted">João Jardim • 2023</small></p>
-                    <p class="card-text text-truncate-2">As diferentes fases da carreira do cantor Ney Matogrosso, desde a sua infância, passando pela adolescência e a vida adulta.</p>
-                    <div class="mt-auto d-flex justify-content-between align-items-center">
-                        <span class="badge bg-secondary">Digital</span>
-                        <a href="#" class="btn btn-sm btn-custom">Detalhes</a>
-                    </div>
+    <!-- Filme estático 2 -->
+    <div class="col-md-4 mb-4 filme-card" data-categoria="Aventura">
+        <div class="card h-100">
+            <img src="https://via.placeholder.com/300x450?text=Aventura+no+Espaço" class="card-img-top" alt="Aventura no Espaço">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Aventura no Espaço</h5>
+                <p class="card-text"><small class="text-muted">Carlos Saldanha • 2022</small></p>
+                <p class="card-text text-truncate-2">Uma jornada épica através das galáxias em busca do planeta perdido.</p>
+                <div class="mt-auto d-flex justify-content-between align-items-center">
+                    <span class="badge bg-secondary">Blu-ray</span>
+                    <a href="#" class="btn btn-sm btn-custom">Detalhes</a>
                 </div>
             </div>
         </div>
-        
-        <!-- Filme estático 2 -->
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
-                <img src="https://via.placeholder.com/300x450?text=Aventura+no+Espaço" class="card-img-top" alt="Aventura no Espaço">
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">Aventura no Espaço</h5>
-                    <p class="card-text"><small class="text-muted">Carlos Saldanha • 2022</small></p>
-                    <p class="card-text text-truncate-2">Uma jornada épica através das galáxias em busca do planeta perdido.</p>
-                    <div class="mt-auto d-flex justify-content-between align-items-center">
-                        <span class="badge bg-secondary">Blu-ray</span>
-                        <a href="#" class="btn btn-sm btn-custom">Detalhes</a>
-                    </div>
+    </div>
+    
+    <!-- Filme estático 3 -->
+    <div class="col-md-4 mb-4 filme-card" data-categoria="Aventura">
+        <div class="card h-100">
+            <img src="https://via.placeholder.com/300x450?text=O+Mistério+da+Floresta" class="card-img-top" alt="O Mistério da Floresta">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">O Mistério da Floresta</h5>
+                <p class="card-text"><small class="text-muted">Ana Maria • 2021</small></p>
+                <p class="card-text text-truncate-2">Um grupo de exploradores descobre segredos antigos em uma floresta proibida.</p>
+                <div class="mt-auto d-flex justify-content-between align-items-center">
+                    <span class="badge bg-secondary">DVD</span>
+                    <a href="#" class="btn btn-sm btn-custom">Detalhes</a>
                 </div>
             </div>
         </div>
-        
-        <!-- Filme estático 3 -->
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
-                <img src="https://via.placeholder.com/300x450?text=O+Mistério+da+Floresta" class="card-img-top" alt="O Mistério da Floresta">
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">O Mistério da Floresta</h5>
-                    <p class="card-text"><small class="text-muted">Ana Maria • 2021</small></p>
-                    <p class="card-text text-truncate-2">Um grupo de exploradores descobre segredos antigos em uma floresta proibida.</p>
-                    <div class="mt-auto d-flex justify-content-between align-items-center">
-                        <span class="badge bg-secondary">DVD</span>
-                        <a href="#" class="btn btn-sm btn-custom">Detalhes</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Filmes cadastrados pelo admin -->
-        <c:forEach items="${filmes}" var="filme">
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <c:choose>
-                        <c:when test="${not empty filme.imagem}">
-                            <img src="${pageContext.request.contextPath}/${filme.imagem}" class="card-img-top" alt="${filme.titulo}">
-                        </c:when>
-                        <c:otherwise>
-                            <div class="no-image-placeholder">
-                                <i class="fas fa-film"></i>
-                            </div>
-                        </c:otherwise>
-                    </c:choose>
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">${filme.titulo}</h5>
-                        <p class="card-text"><small class="text-muted">${filme.diretor} • ${filme.anoLancamento}</small></p>
-                        <p class="card-text text-truncate-2">${filme.sinopse}</p>
-                        <div class="mt-auto d-flex justify-content-between align-items-center">
-                            <span class="badge bg-secondary">${filme.formato}</span>
-                            <a href="visualizar-filme?id=${filme.id}" class="btn btn-sm btn-custom">Detalhes</a>
+    </div>
+    
+    <!-- Filmes cadastrados pelo admin -->
+    <c:forEach items="${filmes}" var="filme">
+        <div class="col-md-4 mb-4 filme-card" data-categoria="${filme.categoria}">
+            <div class="card h-100" >
+                <c:choose>
+                    <c:when test="${not empty filme.imagem}">
+                        <img src="${pageContext.request.contextPath}/${filme.imagem}" class="card-img-top" alt="${filme.titulo}">
+                    </c:when>
+                    <c:otherwise>
+                        <div class="no-image-placeholder">
+                            <i class="fas fa-film"></i>
                         </div>
+                    </c:otherwise>
+                </c:choose>
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">${filme.titulo}</h5>
+                    <p class="card-text"><small class="text-muted">${filme.diretor} • ${filme.anoLancamento}</small></p>
+                    <p class="card-text text-truncate-2">${filme.sinopse}</p>
+                    <div class="mt-auto d-flex justify-content-between align-items-center">
+                        <span class="badge bg-secondary">${filme.formato}</span>
+                        <span class="badge bg-secondary">${filme.categoria}</span>
+                        <a href="visualizar-filme?id=${filme.id}" class="btn btn-sm btn-custom">Detalhes</a>
                     </div>
                 </div>
             </div>
-        </c:forEach>
-    </div>
-    
+        </div>
+    </c:forEach>
+</div>
+
+<nav aria-label="Paginação filmes">
+    <ul class="pagination justify-content-center" id="pagination">
+        <!-- Paginação será gerada pelo JavaScript -->
+    </ul>
+</nav>
+
+
     <!-- Próximas Estreias (seção estática) -->
     <h2 class="section-title mt-5">Próximas Estreias</h2>
     <div class="row estreias-section">
@@ -416,4 +428,110 @@
     </div>
 </div>
 
-<%@ include file="footer.jsp" %>
+
+<!-- Script para filtro e paginação -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const filmes = Array.from(document.querySelectorAll('.filme-card'));
+    const categorias = document.querySelectorAll('.category-badge');
+    const colecaoFilmes = document.getElementById('colecao-filmes');
+    const pagination = document.getElementById('pagination');
+    
+    const itensPorPagina = 6;  // Ajuste a quantidade de filmes por página
+    let paginaAtual = 1;
+    let filmesFiltrados = filmes;
+    
+    function mostrarFilmes(pagina) {
+        const inicio = (pagina - 1) * itensPorPagina;
+        const fim = inicio + itensPorPagina;
+        
+        filmes.forEach(filme => filme.style.display = 'none'); // Oculta todos
+        
+        filmesFiltrados.slice(inicio, fim).forEach(filme => {
+            filme.style.display = 'block'; // Mostra apenas os filmes da página atual
+        });
+    }
+    
+    function criarPaginacao() {
+        pagination.innerHTML = '';
+        const totalPaginas = Math.ceil(filmesFiltrados.length / itensPorPagina);
+        
+        // Botão anterior
+        const prevLi = document.createElement('li');
+        prevLi.classList.add('page-item');
+        if (paginaAtual === 1) prevLi.classList.add('disabled');
+        prevLi.innerHTML = `<a class="page-link" href="#" aria-label="Anterior"><span aria-hidden="true">&laquo;</span></a>`;
+        prevLi.addEventListener('click', function(e) {
+            e.preventDefault();
+            if(paginaAtual > 1){
+                paginaAtual--;
+                mostrarFilmes(paginaAtual);
+                criarPaginacao();
+            }
+        });
+        pagination.appendChild(prevLi);
+        
+        // Páginas numeradas
+        for(let i = 1; i <= totalPaginas; i++) {
+            const li = document.createElement('li');
+            li.classList.add('page-item');
+            if(i === paginaAtual) li.classList.add('active');
+            li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+            li.addEventListener('click', function(e) {
+                e.preventDefault();
+                paginaAtual = i;
+                mostrarFilmes(paginaAtual);
+                criarPaginacao();
+            });
+            pagination.appendChild(li);
+        }
+        
+        // Botão próximo
+        const nextLi = document.createElement('li');
+        nextLi.classList.add('page-item');
+        if (paginaAtual === totalPaginas) nextLi.classList.add('disabled');
+        nextLi.innerHTML = `<a class="page-link" href="#" aria-label="Próximo"><span aria-hidden="true">&raquo;</span></a>`;
+        nextLi.addEventListener('click', function(e) {
+            e.preventDefault();
+            if(paginaAtual < totalPaginas){
+                paginaAtual++;
+                mostrarFilmes(paginaAtual);
+                criarPaginacao();
+            }
+        });
+        pagination.appendChild(nextLi);
+    }
+    
+    function filtrarFilmes(categoria) {
+        if(categoria === 'Todos') {
+            filmesFiltrados = filmes;
+        } else {
+            filmesFiltrados = filmes.filter(filme => filme.dataset.categoria === categoria);
+        }
+        paginaAtual = 1;
+        mostrarFilmes(paginaAtual);
+        criarPaginacao();
+    }
+    
+    // Evento para clicar nas categorias
+    categorias.forEach(cat => {
+        cat.addEventListener('click', () => {
+            // Remove a classe active das outras
+            categorias.forEach(c => {
+                c.classList.remove('bg-primary', 'text-white');
+                c.classList.add('bg-secondary');
+            });
+            // Adiciona active na clicada
+            cat.classList.remove('bg-secondary');
+            cat.classList.add('bg-primary', 'text-white');
+            
+            filtrarFilmes(cat.dataset.categoria);
+        });
+    });
+    
+    // Inicialização: mostra todos e primeira página
+    filtrarFilmes('Todos');
+});
+</script>
+
+<%@ include file="footer.jsp" %> 
