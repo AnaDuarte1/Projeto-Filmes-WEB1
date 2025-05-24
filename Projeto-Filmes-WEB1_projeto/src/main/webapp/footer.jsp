@@ -18,7 +18,7 @@
                     <li class="mb-2"><a href="listar-filmes" class="text-white text-decoration-none">Catalogo de Filmes</a></li>
                     <li class="mb-2"><a href="sobreSistema.jsp" class="text-white text-decoration-none">Sobre o Sistema</a></li>
                     <li class="mb-2"><a href="cadastrar.jsp" class="text-white text-decoration-none">Adicionar Filme</a></li>
-                    <li><a href="login.jsp" class="text-white text-decoration-none">Área do Administrador</a></li>
+                    <li><a href="login.jsp" class="text-white text-decoration-none">Area do Administrador</a></li>
                 </ul>
             </div>
             
@@ -52,6 +52,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+
 <script>
     // Efeito de hover nos links do footer
     $(document).ready(function() {

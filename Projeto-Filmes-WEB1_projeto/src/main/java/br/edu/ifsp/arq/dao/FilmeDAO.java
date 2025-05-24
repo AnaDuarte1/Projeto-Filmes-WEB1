@@ -71,8 +71,8 @@ public class FilmeDAO {
         return false;
     }
 
-     public List<Filme> buscarFilmesPorPalavraChave(String palavraChave) {
-        synchronized (lock) {
+    public List<Filme> buscarFilmesPorPalavraChave(String palavraChave) {
+        synchronized (this) {
             List<Filme> resultados = new ArrayList<>();
             for (Filme filme : filmes) {
                 if (filme.getTitulo().toLowerCase().contains(palavraChave.toLowerCase()) ||

@@ -8,6 +8,7 @@
     int id = Integer.parseInt(request.getParameter("id"));
     Filme filme = filmeDAO.buscarPorId(id);
 %>
+<%@ include file="styles/editar-filme.jsp" %>
 
 <div class="container">
         <div class="edit-movie-container shadow">
