@@ -211,20 +211,20 @@
 <!-- Hero Section -->
 <section class="hero-section text-center">
     <div class="container">
-        <i class="fas fa-film me-2"></i>
-        <h1 class="hero-title">CineWeb</h1>
+        <h1 class="hero-title">CineBlue</h1>
         <p class="hero-subtitle">Descubra os melhores filmes em nossa coleção exclusiva</p>
-        
-        <div class="search-box">
-            <div class="input-group">
-                <input type="text" class="form-control form-control-lg" placeholder="Pesquise por filmes, atores ou diretores...">
-                <div class="input-group-append">
-                    <button class="btn btn-custom" type="button">
-                        <i class="fas fa-search"></i> Buscar
-                    </button>
+        <form action="buscar-filme" method="get">
+            <div class="search-box">
+                <div class="input-group">
+                    <input type="text" class="form-control form-control-lg" name="palavraChave" placeholder="Pesquise por filmes, atores ou diretores..." required>
+                    <div class="input-group-append">
+                        <button class="btn btn-custom" type="submit">
+                            <i class="fas fa-search"></i> Buscar
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </section>
 
