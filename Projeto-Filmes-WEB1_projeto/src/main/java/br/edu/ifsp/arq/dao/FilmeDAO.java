@@ -70,4 +70,18 @@ public class FilmeDAO {
                          filmeAtualizado.getId());
         return false;
     }
+
+     public List<Filme> buscarFilmesPorPalavraChave(String palavraChave) {
+        synchronized (lock) {
+            List<Filme> resultados = new ArrayList<>();
+            for (Filme filme : filmes) {
+                if (filme.getTitulo().toLowerCase().contains(palavraChave.toLowerCase()) ||
+                    filme.getDiretor().toLowerCase().contains(palavraChave.toLowerCase()) ||
+                    filme.getSinopse().toLowerCase().contains(palavraChave.toLowerCase())) {
+                    resultados.add(filme);
+                }
+            }
+            return resultados;
+        }
+    }
 }
