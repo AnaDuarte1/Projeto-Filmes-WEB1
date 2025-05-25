@@ -19,13 +19,12 @@ import javax.servlet.http.Part;
 public class AdicionarFilme extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
+    	request.setCharacterEncoding("UTF-8");
         FilmeDAO filmeDAO = FilmeDAO.getInstance();
         
         try {
-            // Processar upload de imagem
             Part imagemPart = request.getPart("imagem");
             String imagemPath = null;
             
@@ -39,7 +38,6 @@ public class AdicionarFilme extends HttpServlet {
                 imagemPart.write(uploadPath + File.separator + fileName);
             }
 
-            // Criar novo filme
             Filme novoFilme = new Filme(
                 request.getParameter("titulo"),
                 request.getParameter("diretor"),
@@ -50,12 +48,11 @@ public class AdicionarFilme extends HttpServlet {
                 request.getParameter("categoria"),
                 Integer.parseInt(request.getParameter("duracao")),
                 imagemPath,
-                0 // ID será gerado pelo DAO
+                0 
             );
 
             filmeDAO.adicionarFilme(novoFilme);
             
-            // Log de confirmação
             System.out.println("Filme cadastrado com sucesso: " + novoFilme.getTitulo());
             
             response.sendRedirect("home");

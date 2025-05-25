@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-4 mb-4 mb-md-0">
                 <h5 class="text-primary mb-3"><i class="fas fa-film me-2"></i>CineWeb</h5>
-                <p class="text-muted">O melhor catalogo de filmes online para os amantes de cinema.</p>
+                <p class="text-white text-decoration-none">O melhor catalogo de filmes online para os amantes de cinema.</p>
                 <div class="social-icons mt-3">
                     <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
@@ -24,10 +24,10 @@
             
             <div class="col-md-4">
                 <h5 class="text-primary mb-3">Contato</h5>
-                <ul class="list-unstyled text-muted">
-                    <li class="mb-2"><i class="fas fa-envelope me-2"></i> contato@cineweb.com</li>
-                    <li class="mb-2"><i class="fas fa-phone me-2"></i> (11) 1234-5678</li>
-                    <li><i class="fas fa-map-marker-alt me-2"></i> São Paulo, SP</li>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><i class="fas fa-envelope me-2" class="text-white text-decoration-none"></i> direcao.arq@ifsp.edu.br</li>
+                    <li class="mb-2"><i class="fas fa-phone me-2" class="text-white text-decoration-none"></i> (16) 3303-2330</li>
+                    <li><i class="fas fa-map-marker-alt me-2" class="text-white text-decoration-none"></i> Rua Doutor Aldo Benedito Pierri, 250 - Jardim Paulo Freire, Araraquara - SP, 14804-296</li>
                 </ul>
             </div>
         </div>

@@ -53,13 +53,13 @@
                 
                 <div class="d-grid gap-2 mb-3">
                     <button type="submit" class="btn btn-primary btn-login">
-                        <i class="fas fa-sign-in-alt me-2"></i>Entrar
-                    </button>
+					    <i class="fas fa-sign-in-alt me-2"></i>Entrar
+					</button>
+
                 </div>
                 
                 <div class="text-center">
                     <p class="mb-1">Não tem uma conta? <a href="cadastrarUsuario.jsp">Cadastre-se</a></p>
-                    <p><a href="#">Esqueceu sua senha?</a></p>
                 </div>
             </form>
         </div>

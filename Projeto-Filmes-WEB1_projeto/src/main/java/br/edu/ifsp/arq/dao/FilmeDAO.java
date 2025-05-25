@@ -10,7 +10,6 @@ public class FilmeDAO {
     private List<Filme> filmes;
     private AtomicInteger proximoId;
 
-    // Construtor privado
     private FilmeDAO() {
         filmes = new ArrayList<>();
         proximoId = new AtomicInteger(1);
@@ -19,11 +18,9 @@ public class FilmeDAO {
         filmes.add(new Filme("ThunderBolts", "Marvel", 2025, 
                 "Em Thunderbolts, Yelena faz parte de uma equipe composta por ex-supervilões redimidos, prontos para agir em nome de causas controversas.", "Português", 
                 "Digital", "Ação", 120, "imagem/thunderbolts.webp", proximoId.getAndIncrement()));
-        
-        System.out.println("[FilmeDAO] Inicializado com " + filmes.size() + " filmes");
+       
     }
 
-    // Método sincronizado para obter instância
     public static synchronized FilmeDAO getInstance() {
         if (instance == null) {
             instance = new FilmeDAO();
@@ -32,22 +29,17 @@ public class FilmeDAO {
     }
 
     public List<Filme> getFilmes() {
-        System.out.println("[FilmeDAO] Retornando " + filmes.size() + " filmes");
-        return new ArrayList<>(filmes); // Retorna cópia
+        return new ArrayList<>(filmes);
     }
 
     public boolean adicionarFilme(Filme filme) {
         filme.setId(proximoId.getAndIncrement());
         filmes.add(filme);
-        System.out.println("[FilmeDAO] Filme adicionado: " + filme.getTitulo() + 
-                         " (Total: " + filmes.size() + ")");
         return true;
     }
 
     public boolean removerFilme(int id) {
         boolean removido = filmes.removeIf(f -> f.getId() == id);
-        System.out.println("[FilmeDAO] Tentativa de remover ID " + id + 
-                         (removido ? " - Sucesso" : " - Falha"));
         return removido;
     }
 
@@ -62,12 +54,9 @@ public class FilmeDAO {
         for (int i = 0; i < filmes.size(); i++) {
             if (filmes.get(i).getId() == filmeAtualizado.getId()) {
                 filmes.set(i, filmeAtualizado);
-                System.out.println("[FilmeDAO] Filme atualizado: ID " + filmeAtualizado.getId());
                 return true;
             }
         }
-        System.out.println("[FilmeDAO] Filme não encontrado para atualização: ID " + 
-                         filmeAtualizado.getId());
         return false;
     }
 

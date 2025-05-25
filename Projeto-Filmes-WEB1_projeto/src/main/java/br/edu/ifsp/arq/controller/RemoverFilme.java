@@ -14,14 +14,13 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/excluir-filme")
 public class RemoverFilme extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private final FilmeDAO filmeDAO = FilmeDAO.getInstance(); // Usar Singleton
+    private final FilmeDAO filmeDAO = FilmeDAO.getInstance();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
             
-            // Opcional: ainda pode remover a imagem se quiser manter essa funcionalidade
             Filme filme = filmeDAO.buscarPorId(id);
             if (filme != null && filme.getImagem() != null) {
                 String uploadPath = getServletContext().getRealPath("");

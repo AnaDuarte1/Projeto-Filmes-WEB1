@@ -64,14 +64,14 @@
                 <label for="categoria">Categoria</label>
                 <select class="form-select" id="categoria" name="categoria" required>
                     <option value="" selected disabled>Selecione...</option>
-                    <option value="Acao">Ação</option>
+                    <option value="Ação">Ação</option>
                     <option value="Aventura">Aventura</option>
                     <option value="Drama">Drama</option>
-                    <option value="Comedia">Comédia</option>
-                    <option value="Ficcao Cientifica">Ficção Científica</option>
+                    <option value="Comédia">Comédia</option>
+                    <option value="Ficção Científica">Ficção Científica</option>
                     <option value="Terror">Terror</option>
                     <option value="Romance">Romance</option>
-                    <option value="Documentario">Documentário</option>
+                    <option value="Documentário">Documentário</option>
                 </select>
             </div>
 

@@ -1,4 +1,8 @@
 <style>
+		:root {
+	        --primary-color: #0d6efd;
+	        --dark-blue: #0a58ca;
+	        
         .login-container {
             max-width: 500px;
             margin: 5rem auto;

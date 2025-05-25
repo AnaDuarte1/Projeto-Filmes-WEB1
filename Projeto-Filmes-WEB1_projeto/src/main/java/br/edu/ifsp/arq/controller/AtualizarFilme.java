@@ -19,7 +19,7 @@ import javax.servlet.http.Part;
 public class AtualizarFilme extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-    private final FilmeDAO filmeDAO = FilmeDAO.getInstance(); // Usar Singleton
+    private final FilmeDAO filmeDAO = FilmeDAO.getInstance(); 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

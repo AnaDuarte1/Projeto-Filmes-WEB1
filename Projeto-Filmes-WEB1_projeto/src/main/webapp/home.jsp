@@ -7,7 +7,7 @@
 
 <section class="hero-section text-center">
     <div class="container">
-        <h1 class="hero-title">CineBlue</h1>
+        <h1 class="hero-title">CineWeb</h1>
         <p class="hero-subtitle">Descubra os melhores filmes em nossa coleção exclusiva</p>
         <form action="buscar-filme" method="get">
             <div class="search-box">
@@ -30,27 +30,7 @@
     <h2 class="section-title">Em Destaque</h2>
     <div id="filmeCarousel" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
-            <!-- Filme 1 estático -->
-            <div class="carousel-item active">
-                <img src="imagem/missaoImpossivel.jpeg" class="d-block w-100" alt="Homem com H">
-                <div class="carousel-caption">
-                    <h5>Missão Impossível – O Acerto Final </h5>
-                    <p>Ethan Hunt e seus amigos encaram mais um desafio internacional e o agente aprende que a vida é a soma de nossas escolhas..</p>
-                    <a href="#" class="btn btn-custom">Assistir Agora</a>
-                </div>
-            </div>
-            
-            <!-- Filme 2 estático -->
-            <div class="carousel-item">
-                <img src="imagem/premonicao.jpg" class="d-block w-100" alt="Premonição">
-                <div class="carousel-caption">
-                    <h5>Premonição</h5>
-                    <p>A estudante universitária Stefanie é atormentada por um pesadelo recorrente. Ela decide voltar para casa e rastrear a única pessoa que, talvez, possa ser capaz de quebrar o ciclo fatal anunciado e salvar sua família de um destino terrível..</p>
-                    <a href="#" class="btn btn-custom">Assistir Agora</a>
-                </div>
-            </div>
-            
-            <!-- Filmes cadastrados pelo admin -->
+        	<!-- Filmes cadastrados pelo admin -->
             <c:forEach items="${filmes}" var="filme">
                 <div class="carousel-item">
                     <c:choose>
@@ -71,6 +51,25 @@
                     </div>
                 </div>
             </c:forEach>
+            <!-- Filme 1 estático -->
+            <div class="carousel-item active">
+                <img src="imagem/missaoImpossivel.jpeg" class="d-block w-100" alt="Homem com H">
+                <div class="carousel-caption">
+                    <h5>Missão Impossível – O Acerto Final </h5>
+                    <p>Ethan Hunt e seus amigos encaram mais um desafio internacional e o agente aprende que a vida é a soma de nossas escolhas..</p>
+                    <a href="#" class="btn btn-custom">Assistir Agora</a>
+                </div>
+            </div>
+            
+            <!-- Filme 2 estático -->
+            <div class="carousel-item">
+                <img src="imagem/premonicao.jpg" class="d-block w-100" alt="Premonição">
+                <div class="carousel-caption">
+                    <h5>Premonição</h5>
+                    <p>A estudante universitária Stefanie é atormentada por um pesadelo recorrente. Ela decide voltar para casa e rastrear a única pessoa que, talvez, possa ser capaz de quebrar o ciclo fatal anunciado e salvar sua família de um destino terrível..</p>
+                    <a href="#" class="btn btn-custom">Assistir Agora</a>
+                </div>
+            </div>
         </div>
         <a class="carousel-control-prev" href="#filmeCarousel" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -81,23 +80,24 @@
             <span class="sr-only">Próximo</span>
         </a>
     </div>
-   <!-- Categorias -->
-<h2 class="section-title">Categorias</h2>
-<div class="text-center mb-5">
-    <span class="category-badge badge bg-primary text-white" data-categoria="Todos" style="cursor:pointer;">Todos</span>
-    <span class="category-badge badge bg-secondary" data-categoria="Ação" style="cursor:pointer;">Ação</span>
-    <span class="category-badge badge bg-secondary" data-categoria="Aventura" style="cursor:pointer;">Aventura</span>
-    <span class="category-badge badge bg-secondary" data-categoria="Drama" style="cursor:pointer;">Drama</span>
-    <span class="category-badge badge bg-secondary" data-categoria="Comédia" style="cursor:pointer;">Comédia</span>
-    <span class="category-badge badge bg-secondary" data-categoria="Ficção Científica" style="cursor:pointer;">Ficção Científica</span>
-    <span class="category-badge badge bg-secondary" data-categoria="Terror" style="cursor:pointer;">Terror</span>
-    <span class="category-badge badge bg-secondary" data-categoria="Romance" style="cursor:pointer;">Romance</span>
-    <span class="category-badge badge bg-secondary" data-categoria="Documentário" style="cursor:pointer;">Documentário</span>
-</div>
+	<!-- Categorias -->
+	<h2 class="section-title">Categorias</h2>
+	<div class="text-center mb-5">
+	    <span class="category-badge badge bg-primary text-white" data-categoria="Todos" style="cursor:pointer;">Todos</span>
+	    <span class="category-badge badge bg-secondary" data-categoria="Ação" style="cursor:pointer;">Ação</span>
+	    <span class="category-badge badge bg-secondary" data-categoria="Aventura" style="cursor:pointer;">Aventura</span>
+	    <span class="category-badge badge bg-secondary" data-categoria="Drama" style="cursor:pointer;">Drama</span>
+	    <span class="category-badge badge bg-secondary" data-categoria="Comédia" style="cursor:pointer;">Comédia</span>
+	    <span class="category-badge badge bg-secondary" data-categoria="Ficção Científica" style="cursor:pointer;">Ficção Científica</span>
+	    <span class="category-badge badge bg-secondary" data-categoria="Terror" style="cursor:pointer;">Terror</span>
+	    <span class="category-badge badge bg-secondary" data-categoria="Romance" style="cursor:pointer;">Romance</span>
+	    <span class="category-badge badge bg-secondary" data-categoria="Documentário" style="cursor:pointer;">Documentário</span>
+	</div>
 
-<!-- Nossa Coleção -->
-<h2 class="section-title">Nossa Coleção</h2>
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3" id="colecao-filmes">
+	<!-- Nossa Coleção -->
+	<h2 class="section-title">Nossa Coleção</h2>
+	<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3" id="colecao-filmes">
+	
     <!-- Cards Estáticos -->
     
     <!-- Filme estático 1 -->
@@ -159,63 +159,64 @@
             </div>
         </div>
     </c:forEach>
-</div>
+	</div>
 
-<!-- Paginação -->
-<nav aria-label="Paginação filmes">
-    <ul class="pagination justify-content-center" id="pagination">
-        <!-- Paginação será gerada pelo JavaScript -->
-    </ul>
-</nav>
+	<!-- Paginação -->
+	<nav aria-label="Paginação filmes">
+	    <ul class="pagination justify-content-center" id="pagination">
+	        <!-- Paginação será gerada pelo JavaScript -->
+	    </ul>
+	</nav>
 
 
     <!-- Próximas Estreias (seção estática) -->
-<h2 class="section-title mt-5">Próximas Estreias</h2>
-<div class="row estreias-section">
-    <div class="col-md-3 mb-4 h-100">
-        <div class="card d-flex flex-column h-100">
-            <div class="position-relative">
-                <span class="position-absolute top-0 end-0 bg-danger text-white p-2">EM BREVE</span>
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">Guerra dos Mundos</h5>
-                <p class="card-text">A batalha final pela sobrevivência da humanidade.</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3 mb-4 h-100">
-        <div class="card d-flex flex-column h-100">
-            <div class="position-relative">
-                <span class="position-absolute top-0 end-0 bg-danger text-white p-2">EM BREVE</span>
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">O Segredo do Oceano</h5>
-                <p class="card-text">Descubra o mistério que está escondido nas profundezas.</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3 mb-4 h-100">
-        <div class="card d-flex flex-column h-100">
-            <div class="position-relative">
-                <span class="position-absolute top-0 end-0 bg-danger text-white p-2">EM BREVE</span>
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">Riso Contagioso</h5>
-                <p class="card-text">A comédia mais esperada do ano.</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3 mb-4 h-100">
-        <div class="card d-flex flex-column h-100">
-            <div class="position-relative">
-                <span class="position-absolute top-0 end-0 bg-danger text-white p-2">EM BREVE</span>
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">O Legado</h5>
-                <p class="card-text">Um segredo de família que mudará tudo.</p>
-            </div>
-        </div>
-    </div>
+	<h2 class="section-title mt-5">Próximas Estreias</h2>
+	<div class="row estreias-section">
+	    <div class="col-md-3 mb-4 h-100">
+	        <div class="card d-flex flex-column h-100">
+	            <div class="position-relative">
+	                <span class="position-absolute top-0 end-0 bg-danger text-white p-2">EM BREVE</span>
+	            </div>
+	            <div class="card-body">
+	                <h5 class="card-title">Guerra dos Mundos</h5>
+	                <p class="card-text">A batalha final pela sobrevivência da humanidade.</p>
+	            </div>
+	        </div>
+	    </div>
+	    <div class="col-md-3 mb-4 h-100">
+	        <div class="card d-flex flex-column h-100">
+	            <div class="position-relative">
+	                <span class="position-absolute top-0 end-0 bg-danger text-white p-2">EM BREVE</span>
+	            </div>
+	            <div class="card-body">
+	                <h5 class="card-title">O Segredo do Oceano</h5>
+	                <p class="card-text">Descubra o mistério que está escondido nas profundezas.</p>
+	            </div>
+	        </div>
+	    </div>
+	    <div class="col-md-3 mb-4 h-100">
+	        <div class="card d-flex flex-column h-100">
+	            <div class="position-relative">
+	                <span class="position-absolute top-0 end-0 bg-danger text-white p-2">EM BREVE</span>
+	            </div>
+	            <div class="card-body">
+	                <h5 class="card-title">Riso Contagioso</h5>
+	                <p class="card-text">A comédia mais esperada do ano.</p>
+	            </div>
+	        </div>
+	    </div>
+	    <div class="col-md-3 mb-4 h-100">
+	        <div class="card d-flex flex-column h-100">
+	            <div class="position-relative">
+	                <span class="position-absolute top-0 end-0 bg-danger text-white p-2">EM BREVE</span>
+	            </div>
+	            <div class="card-body">
+	                <h5 class="card-title">O Legado</h5>
+	                <p class="card-text">Um segredo de família que mudará tudo.</p>
+	            </div>
+	        </div>
+	    </div>
+	</div>
 </div>
 
 <%@ include file="footer.jsp" %> 

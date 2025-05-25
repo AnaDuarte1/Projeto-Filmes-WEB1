@@ -14,16 +14,13 @@ public class LogoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Obtém a sessão atual
+        
         HttpSession session = request.getSession(false);
         
-        // Verifica se a sessão não é nula
         if (session != null) {
-            // Invalida a sessão
             session.invalidate();
         }
         
-        // Redireciona para a página de login ou página inicial
         response.sendRedirect("login.jsp");
     }
 }

@@ -21,9 +21,6 @@ public class Home extends HttpServlet {
         FilmeDAO filmeDAO = FilmeDAO.getInstance();
         List<Filme> filmes = filmeDAO.getFilmes();
         
-        // Log para depuração
-        System.out.println("HomeServlet: Encontrados " + filmes.size() + " filmes");
-        
         request.setAttribute("filmes", filmes);
         request.getRequestDispatcher("/home.jsp").forward(request, response);
     }
