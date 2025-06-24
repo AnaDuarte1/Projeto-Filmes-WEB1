@@ -2,6 +2,7 @@ package br.edu.ifsp.arq.controller;
 
 import br.edu.ifsp.arq.dao.FilmeDAO;
 import br.edu.ifsp.arq.model.Filme;
+import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,12 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet("/buscar-filme")
 public class BuscarFilme extends HttpServlet {
-	
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     private final FilmeDAO filmeDAO;
 
     public BuscarFilme() {
@@ -24,11 +26,37 @@ public class BuscarFilme extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String palavraChave = request.getParameter("palavraChave");
-        List<Filme> filmesEncontrados = filmeDAO.buscarFilmesPorPalavraChave(palavraChave);
+        
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
 
-        request.setAttribute("filmes", filmesEncontrados);
-        request.setAttribute("tituloPagina", "Resultados da Busca");
-        request.getRequestDispatcher("/resultado-busca.jsp").forward(request, response);
+        Gson gson = new Gson();
+        
+        try {
+            String palavraChave = request.getParameter("palavraChave");
+            
+            if (palavraChave == null || palavraChave.trim().isEmpty()) {
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                Map<String, String> erro = new HashMap<>();
+                erro.put("status", "erro");
+                erro.put("mensagem", "Parâmetro 'palavraChave' é obrigatório.");
+                response.getWriter().write(gson.toJson(erro));
+                return;
+            }
+
+            List<Filme> filmesEncontrados = filmeDAO.buscarFilmesPorPalavraChave(palavraChave);
+
+            String jsonResponse = gson.toJson(filmesEncontrados);
+            response.getWriter().write(jsonResponse);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            Map<String, String> erro = new HashMap<>();
+            erro.put("status", "erro");
+            erro.put("mensagem", "Ocorreu um erro ao processar a busca: " + e.getMessage());
+            response.getWriter().write(gson.toJson(erro));
+        }
     }
 }

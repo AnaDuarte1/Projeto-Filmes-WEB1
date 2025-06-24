@@ -5,7 +5,9 @@ import br.edu.ifsp.arq.model.Filme;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.nio.file.Paths;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -20,21 +22,22 @@ public class AdicionarFilme extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-    	request.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
         FilmeDAO filmeDAO = FilmeDAO.getInstance();
-        
+
         try {
             Part imagemPart = request.getPart("imagem");
             String imagemPath = null;
-            
+
             if (imagemPart != null && imagemPart.getSize() > 0) {
                 String uploadPath = getServletContext().getRealPath("") + File.separator + "imagens";
                 File uploadDir = new File(uploadPath);
-                if (!uploadDir.exists()) uploadDir.mkdir();
-                
+                if (!uploadDir.exists()) {
+                    uploadDir.mkdir();
+                }
+
                 String fileName = Paths.get(imagemPart.getSubmittedFileName()).getFileName().toString();
-                imagemPath = "imagens/" + fileName;
+                imagemPath = "imagens/" + fileName; 
                 imagemPart.write(uploadPath + File.separator + fileName);
             }
 
@@ -47,20 +50,19 @@ public class AdicionarFilme extends HttpServlet {
                 request.getParameter("formato"),
                 request.getParameter("categoria"),
                 Integer.parseInt(request.getParameter("duracao")),
-                imagemPath,
+                imagemPath, 
                 0 
             );
 
             filmeDAO.adicionarFilme(novoFilme);
-            
-            System.out.println("Filme cadastrado com sucesso: " + novoFilme.getTitulo());
-            
-            response.sendRedirect("home");
-            
+
+            response.sendRedirect("visualizar-filme.html?id=" + novoFilme.getId());
+
         } catch (Exception e) {
             e.printStackTrace();
-            request.setAttribute("error", "Erro ao adicionar filme: " + e.getMessage());
-            request.getRequestDispatcher("/adicionar.jsp").forward(request, response);
+            
+            String mensagemErro = URLEncoder.encode("Erro ao adicionar filme: " + e.getMessage(), "UTF-8");
+            response.sendRedirect("cadastrar.html?erro=" + mensagemErro);
         }
     }
 }
