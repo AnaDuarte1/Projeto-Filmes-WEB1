@@ -129,6 +129,8 @@
   text-decoration: underline;
 }
 
+
+
 /* Responsivo */
 @media (max-width: 768px) {
   .developers-cards {

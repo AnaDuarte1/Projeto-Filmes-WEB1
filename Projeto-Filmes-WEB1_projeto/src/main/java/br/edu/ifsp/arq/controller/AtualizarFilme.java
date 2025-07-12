@@ -2,6 +2,7 @@ package br.edu.ifsp.arq.controller;
 
 import br.edu.ifsp.arq.dao.FilmeDAO;
 import br.edu.ifsp.arq.model.Filme;
+import br.edu.ifsp.arq.model.Usuario;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -16,62 +17,63 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 @WebServlet({"/editar-filme", "/atualizar-filme"})
 @MultipartConfig
 public class AtualizarFilme extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private final FilmeDAO filmeDAO = FilmeDAO.getInstance();
 
+
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-
-        Gson gson = new Gson();
-
+        
         try {
             int id = Integer.parseInt(request.getParameter("id"));
-            Filme filme = filmeDAO.buscarPorId(id);
+            Filme filme = FilmeDAO.getInstance().buscarPorId(id);
 
             if (filme == null) {
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                Map<String, String> erro = new HashMap<>();
-                erro.put("status", "erro");
-                erro.put("mensagem", "Filme não encontrado");
-                response.getWriter().write(gson.toJson(erro));
+                response.getWriter().write("{\"status\":\"erro\", \"mensagem\":\"Filme não encontrado\"}");
                 return;
             }
-            response.getWriter().write(gson.toJson(filme));
+            // Returns the movie data as JSON
+            response.getWriter().write(new Gson().toJson(filme));
 
         } catch (NumberFormatException e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            Map<String, String> erro = new HashMap<>();
-            erro.put("status", "erro");
-            erro.put("mensagem", "ID inválido fornecido.");
-            response.getWriter().write(gson.toJson(erro));
-        } catch (Exception e) {
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            Map<String, String> erro = new HashMap<>();
-            erro.put("status", "erro");
-            erro.put("mensagem", "Erro ao buscar filme: " + e.getMessage());
-            response.getWriter().write(gson.toJson(erro));
-            e.printStackTrace();
+            response.getWriter().write("{\"status\":\"erro\", \"mensagem\":\"ID de filme inválido\"}");
         }
     }
 
-   
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
-        Map<String, String> resposta = new HashMap<>();
+        HttpSession session = request.getSession(false);
+        Usuario usuarioLogado = (session != null) ? (Usuario) session.getAttribute("usuarioLogado") : null;
+        
         Gson gson = new Gson();
+        Map<String, String> resposta = new HashMap<>();
+
+        // 1. Security Check: Only admins can update movies.
+        if (usuarioLogado == null || !"admin".equals(usuarioLogado.getTipo())) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            resposta.put("status", "erro");
+            resposta.put("mensagem", "Acesso não autorizado para esta operação.");
+            response.getWriter().write(gson.toJson(resposta));
+            return;
+        }
 
         try {
             int id = Integer.parseInt(request.getParameter("id"));
+            FilmeDAO filmeDAO = FilmeDAO.getInstance();
             Filme filmeAtual = filmeDAO.buscarPorId(id);
 
             if (filmeAtual == null) {
@@ -82,8 +84,8 @@ public class AtualizarFilme extends HttpServlet {
                 return;
             }
 
-            String imagemPath = filmeAtual.getImagem(); 
             Part imagemPart = request.getPart("imagem");
+            String imagemPath = filmeAtual.getImagem(); // Keep the old image by default
             
             if (imagemPart != null && imagemPart.getSize() > 0) {
                 String uploadPath = getServletContext().getRealPath("") + File.separator + "imagens";
@@ -95,30 +97,35 @@ public class AtualizarFilme extends HttpServlet {
                 imagemPart.write(uploadPath + File.separator + fileName);
             }
 
-            Filme filmeAtualizado = new Filme(
-                request.getParameter("titulo"),
-                request.getParameter("diretor"),
-                Integer.parseInt(request.getParameter("anoLancamento")),
-                request.getParameter("sinopse"),
-                request.getParameter("idioma"),
-                request.getParameter("formato"),
-                request.getParameter("categoria"),
-                Integer.parseInt(request.getParameter("duracao")),
-                imagemPath,
-                id 
-            );
+            filmeAtual.setTitulo(request.getParameter("titulo"));
+            filmeAtual.setDiretor(request.getParameter("diretor"));
+            filmeAtual.setAnoLancamento(Integer.parseInt(request.getParameter("anoLancamento")));
+            filmeAtual.setSinopse(request.getParameter("sinopse"));
+            filmeAtual.setIdioma(request.getParameter("idioma"));
+            filmeAtual.setFormato(request.getParameter("formato"));
+            filmeAtual.setCategoria(request.getParameter("categoria"));
+            filmeAtual.setDuracao(Integer.parseInt(request.getParameter("duracao")));
+            filmeAtual.setImagem(imagemPath);
 
-            filmeDAO.atualizarFilme(filmeAtualizado);
+            boolean atualizado = filmeDAO.atualizarFilme(filmeAtual);
             
-            resposta.put("status", "sucesso");
-            resposta.put("mensagem", "Filme '" + filmeAtualizado.getTitulo() + "' atualizado com sucesso!");
+            if (atualizado) {
+                resposta.put("status", "sucesso");
+                resposta.put("mensagem", "Filme '" + filmeAtual.getTitulo() + "' atualizado com sucesso!");
+                resposta.put("filmeId", String.valueOf(filmeAtual.getId()));
+            } else {
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                resposta.put("status", "erro");
+                resposta.put("mensagem", "Ocorreu um erro inesperado ao salvar as alterações.");
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             resposta.put("status", "erro");
-            resposta.put("mensagem", "Erro ao atualizar filme: " + e.getMessage());
+            resposta.put("mensagem", "Erro ao processar a requisição: " + e.getMessage());
         } finally {
+            // 5. Send the JSON response
             response.getWriter().write(gson.toJson(resposta));
         }
     }

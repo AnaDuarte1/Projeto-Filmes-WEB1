@@ -1,5 +1,8 @@
 package br.edu.ifsp.arq.model;
 
+import java.util.List; 
+import java.util.ArrayList;
+
 public class Filme {
     private int id;
     private String titulo;
@@ -11,6 +14,8 @@ public class Filme {
     private String categoria;
     private int duracao;
     private String imagem; 
+    private double notaMedia;
+    private List<Comentario> comentarios;
     
     public Filme(String titulo, String diretor, int anoLancamento, String sinopse, String idioma, String formato, String categoria, int duracao, String imagem, int id) {
         this.id = id;
@@ -23,10 +28,37 @@ public class Filme {
         this.categoria = categoria;
         this.duracao = duracao;
         this.imagem = imagem;
+        this.comentarios = new ArrayList<>();
+        this.notaMedia = 0.0;
+    }
+    
+    public void recalcularNotaMedia() {
+        if (comentarios == null || comentarios.isEmpty()) {
+            this.notaMedia = 0.0;
+            return;
+        }
+        double soma = 0;
+        for (Comentario c : comentarios) {
+            soma += c.getNota();
+        }
+        this.notaMedia = soma / comentarios.size();
     }
 
-    
-	public int getId() {
+    // Getters e Setters
+    public double getNotaMedia() { 
+        return notaMedia; 
+    }
+    public void setNotaMedia(double notaMedia) { 
+        this.notaMedia = notaMedia; 
+    }
+    public List<Comentario> getComentarios() {
+        return comentarios; 
+    }
+    public void setComentarios(List<Comentario> comentarios) { 
+        this.comentarios = comentarios; 
+    }
+
+    public int getId() {
         return id;
     }
 
